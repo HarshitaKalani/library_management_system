@@ -1,4 +1,4 @@
-package com.example.library_management_system
+package com.example.loginapp
 
 import io.flutter.embedding.android.FlutterActivity
 
