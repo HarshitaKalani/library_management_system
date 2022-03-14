@@ -1,20 +1,14 @@
-import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+// import 'dart:html';
+// import 'package:universal_html/html.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'main.dart';
-import 'temp.dart';
+import 'package:flutter/material.dart';
 
-class Index extends StatefulWidget {
+class ProductCard extends StatefulWidget {
   @override
-  _IndexState createState() => _IndexState();
+  _ProductCardState createState() => _ProductCardState();
 }
 
-class _IndexState extends State<Index> {
-  int _currentIndex = 0;
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  User user;
-  bool isloggedin = false;
+class _ProductCardState extends State<ProductCard> {
   int _current = 0;
   dynamic _selectedIndex = {};
 
@@ -40,42 +34,13 @@ class _IndexState extends State<Index> {
     }
   ];
 
-  getUser() async {
-    User firebaseUser = _auth.currentUser;
-    await firebaseUser?.reload();
-    firebaseUser = _auth.currentUser;
-
-    if (firebaseUser != null) {
-      setState(() {
-        this.user = firebaseUser;
-        this.isloggedin = true;
-      });
-    }
-  }
-
-  signOut() async {
-    _auth.signOut();
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => HomePage()));
-  }
-
-  @override
-  void initState() {
-    this.getUser();
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: _selectedIndex.length > 0
           ? Container(
               child: Align(
-                // alignment: Alignment(
-                //   (0.0 / MediaQuery.of(context).size.width),
-                //   (0.0 / (MediaQuery.of(context).size.height)),
-                // ),
-                alignment: Alignment.bottomRight,
+                alignment: Alignment(1.05, -0.9),
                 child: FloatingActionButton(
                   onPressed: () {},
                   child: Icon(
@@ -196,79 +161,6 @@ class _IndexState extends State<Index> {
               );
             }).toList()),
       ),
-      bottomNavigationBar: SalomonBottomBar(
-        currentIndex: _currentIndex,
-        margin: EdgeInsets.symmetric(vertical: 30, horizontal: 20),
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-            if (index == 3) {
-              _auth.signOut();
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => HomePage()));
-            }
-            // else if (index == 0) {
-            //   Navigator.push(
-            //       context, MaterialPageRoute(builder: (context) => Index()));
-            // }
-            // else if (index == 1) {
-            //   Navigator.push(
-            //       context, MaterialPageRoute(builder: (context) => Search()));
-            // }
-            // else if (index == 2) {
-            //   Navigator.push(
-            //       context, MaterialPageRoute(builder: (context) => Person()));
-            // }
-          });
-        },
-        items: [
-          SalomonBottomBarItem(
-            icon: Icon(Icons.home),
-            title: Text("Home"),
-            selectedColor: Colors.purple,
-          ),
-          // SalomonBottomBarItem(
-          //     icon: Icon(Icons.favorite_border),
-          //     title: Text("Likes"),
-          //     selectedColor: Colors.pink),
-          SalomonBottomBarItem(
-            icon: Icon(Icons.search),
-            title: Text("Search"),
-            selectedColor: Colors.orange,
-          ),
-          SalomonBottomBarItem(
-            icon: Icon(Icons.person),
-            title: Text("Profile"),
-            selectedColor: Colors.teal,
-          ),
-          SalomonBottomBarItem(
-            icon: Icon(Icons.logout),
-            title: Text("LogOut"),
-            selectedColor: Colors.redAccent,
-          ),
-        ],
-      ),
     );
   }
-}
-
-class MyPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    Paint paint = Paint()..color = Colors.blue;
-    canvas.drawArc(
-      Rect.fromCenter(
-        center: Offset(size.height / 2, size.width / 2),
-        height: size.height,
-        width: size.width,
-      ),
-      3.14,
-      3.14,
-      false,
-      paint,
-    );
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) => false;
 }

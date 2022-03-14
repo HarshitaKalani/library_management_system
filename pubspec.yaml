@@ -31,6 +31,8 @@ dependencies:
     sdk: flutter
   # simple_animation: ^4.0.1
   salomon_bottom_bar: ^3.2.0
+  carousel_slider: ^4.0.0
+  universal_html: ^2.0.8
 
 
 
@@ -71,6 +73,9 @@ flutter:
   assets:
     - assets/Illustration.png
     - assets/background.png
+    - assets/Logo_IITJ.png
+    - assets/5836.jpg
+    - assets/54955.jpg
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
