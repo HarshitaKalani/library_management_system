@@ -13,7 +13,7 @@ class _SignupPageState extends State<SignupPage> {
   @override
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  String _email, _password, _name;
+  late String _email, _password, _name;
 
   checkAuthentification() async {
     _auth.authStateChanges().listen((user) async {
@@ -25,8 +25,8 @@ class _SignupPageState extends State<SignupPage> {
   }
 
   signUp() async {
-    if (_formKey.currentState.validate()) {
-      _formKey.currentState.save();
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
     }
     try {
       UserCredential user = await _auth.createUserWithEmailAndPassword(
@@ -35,7 +35,7 @@ class _SignupPageState extends State<SignupPage> {
         await _auth.currentUser.updateProfile(displayName: _name);
       }
     } catch (e) {
-      showError(e.errormessage);
+      showError("Error Here");
     }
   }
 
@@ -144,7 +144,7 @@ class _SignupPageState extends State<SignupPage> {
                                   ),
                                 )),
                               ),
-                              onSaved: (input) => _name = input,
+                              onSaved: (input) => _name = input!,
                             ),
                           ),
                           SizedBox(height: 10),
@@ -165,7 +165,7 @@ class _SignupPageState extends State<SignupPage> {
                                   ),
                                 )),
                               ),
-                              onSaved: (input) => _email = input,
+                              onSaved: (input) => _email = input!,
                             ),
                           ),
                           SizedBox(height: 10),
@@ -187,7 +187,7 @@ class _SignupPageState extends State<SignupPage> {
                                 )),
                               ),
                               obscureText: true,
-                              onSaved: (input) => _password = input,
+                              onSaved: (input) => _password = input!,
                             ),
                           ),
                         ],

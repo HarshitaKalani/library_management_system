@@ -4,6 +4,8 @@ import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'main.dart';
 import 'temp.dart';
+import 'writeFireStore.dart';
+import 'readFireStore.dart';
 
 class Index extends StatefulWidget {
   @override
@@ -13,7 +15,7 @@ class Index extends StatefulWidget {
 class _IndexState extends State<Index> {
   int _currentIndex = 0;
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  User user;
+  late User user;
   bool isloggedin = false;
   int _current = 0;
   dynamic _selectedIndex = {};
@@ -42,7 +44,7 @@ class _IndexState extends State<Index> {
 
   getUser() async {
     User firebaseUser = _auth.currentUser;
-    await firebaseUser?.reload();
+    await firebaseUser.reload();
     firebaseUser = _auth.currentUser;
 
     if (firebaseUser != null) {
@@ -77,7 +79,14 @@ class _IndexState extends State<Index> {
                 // ),
                 alignment: Alignment.bottomRight,
                 child: FloatingActionButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    if (_current == 1) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SelectService()));
+                    }
+                  },
                   child: Icon(
                     Icons.arrow_forward_ios,
                   ),
@@ -204,21 +213,26 @@ class _IndexState extends State<Index> {
             _currentIndex = index;
             if (index == 3) {
               _auth.signOut();
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => HomePage()));
+              // Navigator.push(
+              //     context, MaterialPageRoute(builder: (context) => HomePage()));
+              Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (context) => HomePage()),
+                  (route) => false);
             }
+
             // else if (index == 0) {
-            //   Navigator.push(
-            //       context, MaterialPageRoute(builder: (context) => Index()));
+            //   Navigator.push(context,
+            //       MaterialPageRoute(builder: (context) => SelectService()));
             // }
-            // else if (index == 1) {
-            //   Navigator.push(
-            //       context, MaterialPageRoute(builder: (context) => Search()));
-            // }
-            // else if (index == 2) {
-            //   Navigator.push(
-            //       context, MaterialPageRoute(builder: (context) => Person()));
-            // }
+            else if (index == 1) {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => AddUser("Chiku", "TBD", 10)));
+            } else if (index == 2) {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => GetUserName()));
+            }
           });
         },
         items: [

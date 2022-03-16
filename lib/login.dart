@@ -11,19 +11,19 @@ class _LoginPageState extends State<LoginPage> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  String _email, _password;
+  late String _email, _password;
 
   login() async {
     if (_formKey != null &&
         _formKey.currentState != null &&
-        _formKey.currentState.validate()) {
-      _formKey.currentState.save();
+        _formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
       Navigator.push(context, MaterialPageRoute(builder: (context) => Index()));
       try {
         await _auth.signInWithEmailAndPassword(
             email: _email, password: _password);
       } catch (e) {
-        showError(e.errormessage);
+        showError("Error here");
       }
     }
   }
@@ -136,7 +136,7 @@ class _LoginPageState extends State<LoginPage> {
                                         ),
                                       )),
                                     ),
-                                    onSaved: (input) => _email = input,
+                                    onSaved: (input) => _email = input!,
                                   ),
                                 ),
                                 SizedBox(
@@ -162,7 +162,7 @@ class _LoginPageState extends State<LoginPage> {
                                       )),
                                     ),
                                     obscureText: true,
-                                    onSaved: (input) => _password = input,
+                                    onSaved: (input) => _password = input!,
                                   ),
                                 ),
                               ],

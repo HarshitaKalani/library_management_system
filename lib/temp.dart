@@ -1,165 +1,135 @@
-// import 'dart:html';
-// import 'package:universal_html/html.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+import 'animation/FadeAnimation.dart';
+import 'models/books.dart';
 import 'package:flutter/material.dart';
 
-class ProductCard extends StatefulWidget {
+class SelectService extends StatefulWidget {
+  const SelectService({Key? key}) : super(key: key);
+
   @override
-  _ProductCardState createState() => _ProductCardState();
+  _SelectServiceState createState() => _SelectServiceState();
 }
 
-class _ProductCardState extends State<ProductCard> {
-  int _current = 0;
-  dynamic _selectedIndex = {};
-
-  CarouselController _carouselController = new CarouselController();
-
-  List<dynamic> _products = [
-    {
-      'title': 'Library Sitting Space Arrangement',
-      'image': 'assets/Logo_IITJ.png',
-      'description': 'Tap to see available spaces'
-    },
-    {
-      'title': 'Books List',
-      // 'image':'https://images.unsplash.com/photo-1582588678413-dbf45f4823e9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2265&q=80',
-      'image': 'assets/5836.jpg',
-      'description': 'Tap to see Availabe Books'
-    },
-    {
-      'title': 'Our Team',
-      // 'image':'https://images.unsplash.com/photo-1589188056053-28910dc61d38?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2264&q=80',
-      'image': 'assets/54955.jpg',
-      'description': 'Wohoo!!'
-    }
+class _SelectServiceState extends State<SelectService> {
+  List<Service> services = [
+    Service('checking',
+        'https://img.icons8.com/external-vitaliy-gorbachev-flat-vitaly-gorbachev/2x/external-cleaning-labour-day-vitaliy-gorbachev-flat-vitaly-gorbachev.png'),
+    Service('Plumber',
+        'https://img.icons8.com/external-vitaliy-gorbachev-flat-vitaly-gorbachev/2x/external-plumber-labour-day-vitaliy-gorbachev-flat-vitaly-gorbachev.png'),
+    Service('Electrician',
+        'https://img.icons8.com/external-wanicon-flat-wanicon/2x/external-multimeter-car-service-wanicon-flat-wanicon.png'),
+    Service('Painter',
+        'https://img.icons8.com/external-itim2101-flat-itim2101/2x/external-painter-male-occupation-avatar-itim2101-flat-itim2101.png'),
+    Service('Carpenter', 'https://img.icons8.com/fluency/2x/drill.png'),
+    Service('Gardener',
+        'https://img.icons8.com/external-itim2101-flat-itim2101/2x/external-gardener-male-occupation-avatar-itim2101-flat-itim2101.png'),
+    Service('Tailor', 'https://img.icons8.com/fluency/2x/sewing-machine.png'),
+    Service('Maid', 'https://img.icons8.com/color/2x/housekeeper-female.png'),
+    Service('Driver',
+        'https://img.icons8.com/external-sbts2018-lineal-color-sbts2018/2x/external-driver-women-profession-sbts2018-lineal-color-sbts2018.png'),
+    Service('Cook',
+        'https://img.icons8.com/external-wanicon-flat-wanicon/2x/external-cooking-daily-routine-wanicon-flat-wanicon.png'),
   ];
+
+  int selectedService = -1;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: _selectedIndex.length > 0
-          ? Container(
-              child: Align(
-                alignment: Alignment(1.05, -0.9),
-                child: FloatingActionButton(
-                  onPressed: () {},
-                  child: Icon(
-                    Icons.arrow_forward_ios,
+        backgroundColor: Colors.white,
+        floatingActionButton: selectedService >= 0
+            ? FloatingActionButton(
+                onPressed: () {},
+                child: Icon(
+                  Icons.arrow_forward_ios,
+                  size: 20,
+                ),
+                backgroundColor: Colors.blue,
+              )
+            : null,
+        body: NestedScrollView(
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            return <Widget>[
+              SliverToBoxAdapter(
+                  child: FadeAnimation(
+                1.2,
+                Padding(
+                  padding: EdgeInsets.only(top: 120.0, right: 20.0, left: 20.0),
+                  child: Text(
+                    'Which Book \nyou prefer?',
+                    style: TextStyle(
+                      fontSize: 40,
+                      color: Colors.grey.shade900,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
-              ),
-            )
-          : null,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        title: Text(
-          'You are @Library IIT Jodhpur',
-          style: TextStyle(
-            color: Colors.black,
-          ),
-        ),
-      ),
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        child: CarouselSlider(
-            carouselController: _carouselController,
-            options: CarouselOptions(
-                height: 450.0,
-                aspectRatio: 16 / 9,
-                viewportFraction: 0.70,
-                enlargeCenterPage: true,
-                pageSnapping: true,
-                onPageChanged: (index, reason) {
-                  setState(() {
-                    _current = index;
-                  });
-                }),
-            items: _products.map((movie) {
-              return Builder(
-                builder: (BuildContext context) {
-                  return GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        if (_selectedIndex == movie) {
-                          _selectedIndex = {};
-                        } else {
-                          _selectedIndex = movie;
-                        }
-                      });
-                    },
-                    child: AnimatedContainer(
-                      duration: Duration(milliseconds: 300),
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(20),
-                          border: _selectedIndex == movie
-                              ? Border.all(
-                                  color: Colors.blue.shade500, width: 3)
-                              : null,
-                          boxShadow: _selectedIndex == movie
-                              ? [
-                                  BoxShadow(
-                                      color: Colors.blue.shade100,
-                                      blurRadius: 30,
-                                      offset: Offset(0, 10))
-                                ]
-                              : [
-                                  BoxShadow(
-                                      color: Colors.grey.withOpacity(0.2),
-                                      blurRadius: 20,
-                                      offset: Offset(0, 5))
-                                ]),
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            Container(
-                              height: 320,
-                              margin: EdgeInsets.only(top: 10),
-                              clipBehavior: Clip.hardEdge,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              // child: Image.network(movie['image'],
-                              //     fit: BoxFit.cover),
-                              child: Container(
-                                height: MediaQuery.of(context).size.height / 3,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: AssetImage(
-                                      movie['image'],
-                                    ),
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Text(
-                              movie['title'],
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.bold),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Text(
-                              movie['description'],
-                              style: TextStyle(
-                                  fontSize: 14, color: Colors.grey.shade600),
-                            ),
-                          ],
+              ))
+            ];
+          },
+          body: Padding(
+            padding: EdgeInsets.all(20.0),
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Expanded(
+                    child: GridView.builder(
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          childAspectRatio: 1.0,
+                          crossAxisSpacing: 20.0,
+                          mainAxisSpacing: 20.0,
                         ),
-                      ),
-                    ),
-                  );
-                },
-              );
-            }).toList()),
+                        physics: NeverScrollableScrollPhysics(),
+                        itemCount: services.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return FadeAnimation(
+                              (1.0 + index) / 4,
+                              serviceContainer(services[index].imageURL,
+                                  services[index].name, index));
+                        }),
+                  ),
+                ]),
+          ),
+        ));
+  }
+
+  serviceContainer(String image, String name, int index) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          if (selectedService == index)
+            selectedService = -1;
+          else
+            selectedService = index;
+        });
+      },
+      child: AnimatedContainer(
+        duration: Duration(milliseconds: 300),
+        padding: EdgeInsets.all(10.0),
+        decoration: BoxDecoration(
+          color: selectedService == index
+              ? Colors.blue.shade50
+              : Colors.grey.shade100,
+          border: Border.all(
+            color: selectedService == index
+                ? Colors.blue
+                : Colors.blue.withOpacity(0),
+            width: 2.0,
+          ),
+          borderRadius: BorderRadius.circular(20.0),
+        ),
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Image.network(image, height: 80),
+              SizedBox(
+                height: 20,
+              ),
+              Text(
+                name,
+                style: TextStyle(fontSize: 20),
+              )
+            ]),
       ),
     );
   }
