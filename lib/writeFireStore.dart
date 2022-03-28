@@ -11,7 +11,7 @@ class AddUser extends StatelessWidget {
   AddUser(this.fullName, this.company, this.age);
   @override
   Widget build(BuildContext context) {
-    CollectionReference users = FirebaseFirestore.instance.collection('users');
+    CollectionReference users = FirebaseFirestore.instance.collection('Books');
     Future<void> addUser() {
       // Call the user's CollectionReference to add a new user
       return users
