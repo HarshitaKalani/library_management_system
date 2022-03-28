@@ -6,6 +6,11 @@ import 'main.dart';
 import 'temp.dart';
 import 'writeFireStore.dart';
 import 'readFireStore.dart';
+import 'models/books.dart';
+import 'genre.dart';
+
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Index extends StatefulWidget {
   @override
@@ -13,6 +18,13 @@ class Index extends StatefulWidget {
 }
 
 class _IndexState extends State<Index> {
+  // List<Service> services2 = Service.getList(); // to show book in backend.
+  List<Service> services2 = <Service>[
+    Service('Cleaning',
+        'https://img.icons8.com/external-vitaliy-gorbachev-flat-vitaly-gorbachev/2x/external-cleaning-labour-day-vitaliy-gorbachev-flat-vitaly-gorbachev.png'),
+  ];
+  List<Books> books = <Books>[];
+
   int _currentIndex = 0;
   final FirebaseAuth _auth = FirebaseAuth.instance;
   late User user;
@@ -61,9 +73,43 @@ class _IndexState extends State<Index> {
         context, MaterialPageRoute(builder: (context) => HomePage()));
   }
 
+  getService() async {
+    final Future<Null> _listUser = FirebaseFirestore.instance
+        .collection('users')
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      var i = 0;
+      querySnapshot.docs.forEach((doc) {
+        // print(doc["full_name"]);
+        var x = Service(doc["full_name"],
+            'https://img.icons8.com/external-vitaliy-gorbachev-flat-vitaly-gorbachev/2x/external-cleaning-labour-day-vitaliy-gorbachev-flat-vitaly-gorbachev.png');
+        services2.insert(i, x);
+        i = i + 1;
+      });
+    });
+  }
+
+  getBooks() async {
+    final Future<Null> _listUser = FirebaseFirestore.instance
+        .collection('Books')
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      var i = 0;
+      var flag = 0;
+      querySnapshot.docs.forEach((doc) {
+        var x = Books(doc['bookName'], doc['bookGenre'], doc['bookImage'],
+            doc['bookAuthor']);
+
+        books.insert(i, x);
+      });
+    });
+  }
+
   @override
   void initState() {
     this.getUser();
+    this.getService();
+    this.getBooks();
     super.initState();
   }
 
@@ -81,10 +127,35 @@ class _IndexState extends State<Index> {
                 child: FloatingActionButton(
                   onPressed: () {
                     if (_current == 1) {
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) =>
+                      //             SelectService(services: services2)));
+                      List<Books> booksGenre = <Books>[];
+                      print(books.length);
+                      for (var i = 0; i < books.length; i = i + 1) {
+                        var flag = 0;
+                        if (booksGenre.length == 0) {
+                          booksGenre.insert(0, books[i]);
+                        } else {
+                          for (var j = 0; j < booksGenre.length; j = j + 1) {
+                            if (booksGenre[j].bookGenre == books[i].bookGenre) {
+                              flag = 1;
+                              break;
+                            }
+                          }
+                          if (flag == 0) {
+                            booksGenre.insert(0, books[i]);
+                          }
+                        }
+                      }
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => SelectService()));
+                              builder: (context) => Genre(
+                                    booksGenre: booksGenre,
+                                  )));
                     }
                   },
                   child: Icon(
@@ -228,7 +299,8 @@ class _IndexState extends State<Index> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => AddUser("Chiku", "TBD", 10)));
+                      builder: (context) =>
+                          AddUser("Hereit is", "Flipkart", 20)));
             } else if (index == 2) {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => GetUserName()));

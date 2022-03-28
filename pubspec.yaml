@@ -33,6 +33,7 @@ dependencies:
   salomon_bottom_bar: ^3.2.0
   carousel_slider: ^4.0.0
   universal_html: ^2.0.8
+  auto_reload: ^1.0.0
 
 
 
@@ -45,7 +46,7 @@ dependencies:
   firebase_auth: ^0.18.4+1
   flutter_signin_button: ^1.0.0
   firebase_core: ^0.5.3
-  google_sign_in: ^4.5.9
+  google_sign_in: ^4.5.1
   cloud_firestore: ^0.14.4
 
 dev_dependencies:

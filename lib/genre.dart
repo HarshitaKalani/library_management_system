@@ -1,3 +1,5 @@
+import 'package:loginapp/variableBooks.dart';
+
 import 'animation/FadeAnimation.dart';
 import 'models/books.dart';
 import 'package:flutter/material.dart';
@@ -5,16 +7,18 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class SelectService extends StatefulWidget {
-  // const SelectService({Key? key}) : super(key: key);
-  final List<Service> services;
-  SelectService({required this.services});
+class Genre extends StatefulWidget {
+  // const Genre({Key? key}) : super(key: key);
+  // final List<Service> services;
+  final List<Books> booksGenre;
+
+  Genre({required this.booksGenre});
 
   @override
-  _SelectServiceState createState() => _SelectServiceState();
+  _GenreState createState() => _GenreState();
 }
 
-class _SelectServiceState extends State<SelectService> {
+class _GenreState extends State<Genre> {
   // List<Service> services = [
   //   Service('Cleaning',
   //       'https://img.icons8.com/external-vitaliy-gorbachev-flat-vitaly-gorbachev/2x/external-cleaning-labour-day-vitaliy-gorbachev-flat-vitaly-gorbachev.png'),
@@ -34,32 +38,27 @@ class _SelectServiceState extends State<SelectService> {
   //   Service('Cook',
   //       'https://img.icons8.com/external-wanicon-flat-wanicon/2x/external-cooking-daily-routine-wanicon-flat-wanicon.png'),
   // ];
+  // List<Service> services = [
+  //   Service('Genre 1',
+  //       'https://img.icons8.com/external-vitaliy-gorbachev-flat-vitaly-gorbachev/2x/external-cleaning-labour-day-vitaliy-gorbachev-flat-vitaly-gorbachev.png'),
+  //   Service('Genre 2',
+  //       'https://img.icons8.com/external-vitaliy-gorbachev-flat-vitaly-gorbachev/2x/external-plumber-labour-day-vitaliy-gorbachev-flat-vitaly-gorbachev.png'),
+  //   Service('Genre 3',
+  //       'https://img.icons8.com/external-wanicon-flat-wanicon/2x/external-multimeter-car-service-wanicon-flat-wanicon.png'),
+  //   // Service('Painter',
+  //   //     'https://img.icons8.com/external-itim2101-flat-itim2101/2x/external-painter-male-occupation-avatar-itim2101-flat-itim2101.png'),
+  //   // Service('Carpenter', 'https://img.icons8.com/fluency/2x/drill.png'),
+  //   // Service('Gardener',
+  //   //     'https://img.icons8.com/external-itim2101-flat-itim2101/2x/external-gardener-male-occupation-avatar-itim2101-flat-itim2101.png'),
+  //   // Service('Tailor', 'https://img.icons8.com/fluency/2x/sewing-machine.png'),
+  //   // Service('Maid', 'https://img.icons8.com/color/2x/housekeeper-female.png'),
+  //   // Service('Driver',
+  //   //     'https://img.icons8.com/external-sbts2018-lineal-color-sbts2018/2x/external-driver-women-profession-sbts2018-lineal-color-sbts2018.png'),
+  //   // Service('Cook',
+  //   //     'https://img.icons8.com/external-wanicon-flat-wanicon/2x/external-cooking-daily-routine-wanicon-flat-wanicon.png'),
+  // ];
 
   int selectedService = -1;
-
-  // List<Service> services2 = [
-  //   Service('Cleaning',
-  //       'https://img.icons8.com/external-vitaliy-gorbachev-flat-vitaly-gorbachev/2x/external-cleaning-labour-day-vitaliy-gorbachev-flat-vitaly-gorbachev.png'),
-  // ];
-  //  var count = 0;
-
-  // void initState() {
-  //   final Future<Null> _listUser = FirebaseFirestore.instance
-  //       .collection('users')
-  //       .get()
-  //       .then((QuerySnapshot querySnapshot) {
-  //     var i = 0;
-  //     querySnapshot.docs.forEach((doc) {
-  //       // print(doc["full_name"]);
-  //       var x = Service(doc["full_name"],
-  //           'https://img.icons8.com/external-vitaliy-gorbachev-flat-vitaly-gorbachev/2x/external-cleaning-labour-day-vitaliy-gorbachev-flat-vitaly-gorbachev.png');
-  //       services2.insert(i, x);
-  //       // print(services2);
-  //       count = count + 1;
-  //     });
-  //   });
-  //   super.initState();
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +66,36 @@ class _SelectServiceState extends State<SelectService> {
         backgroundColor: Colors.white,
         floatingActionButton: selectedService >= 0
             ? FloatingActionButton(
-                onPressed: () {},
+                onPressed: () {
+                  // print(selectedService);
+                  var genre = widget.booksGenre[selectedService].bookGenre;
+                  print(genre);
+                  List<Books> selectedBooks = <Books>[];
+                  final Future<Null> _listUser = FirebaseFirestore.instance
+                      .collection('Books')
+                      .where('bookGenre', isEqualTo: genre)
+                      .get()
+                      .then((QuerySnapshot querySnapshot) {
+                    var i = 0;
+                    var flag = 0;
+                    querySnapshot.docs.forEach(
+                      (doc) {
+                        var x = Books(doc['bookName'], doc['bookGenre'],
+                            doc['bookImage'], doc['bookAuthor']);
+
+                        selectedBooks.insert(i, x);
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => VariableBooks(
+                                      books: selectedBooks,
+                                    )));
+
+                        // print(selectedBooks);
+                      },
+                    );
+                  });
+                },
                 child: Icon(
                   Icons.arrow_forward_ios,
                   size: 20,
@@ -84,7 +112,7 @@ class _SelectServiceState extends State<SelectService> {
                 Padding(
                   padding: EdgeInsets.only(top: 120.0, right: 20.0, left: 20.0),
                   child: Text(
-                    'Which Book \nyou prefer?',
+                    'Select Genre!',
                     style: TextStyle(
                       fontSize: 40,
                       color: Colors.grey.shade900,
@@ -109,14 +137,16 @@ class _SelectServiceState extends State<SelectService> {
                           mainAxisSpacing: 20.0,
                         ),
                         physics: NeverScrollableScrollPhysics(),
-                        itemCount: widget.services.length,
+                        itemCount: widget.booksGenre.length,
                         itemBuilder: (BuildContext context, int index) {
-                          print(widget.services.length);
+                          print(widget.booksGenre.length);
                           print("here2002");
                           return FadeAnimation(
                               (1.0 + index) / 4,
-                              serviceContainer(widget.services[index].imageURL,
-                                  widget.services[index].name, index));
+                              serviceContainer(
+                                  widget.booksGenre[index].bookImage,
+                                  widget.booksGenre[index].bookGenre,
+                                  index));
                         }),
                   ),
                 ]),
