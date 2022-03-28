@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:loginapp/genre.dart';
+import 'package:loginapp/variableBooks.dart';
 // import 'package:universal_html/html.dart';
 import 'login.dart';
 import 'signup.dart';
@@ -13,6 +15,15 @@ void main() async {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     home: HomePage(),
+    // initialRoute: '/',
+    // routes: {
+    //   // When navigating to the "/" route, build the FirstScreen widget.
+    //   '/': (context) => HomePage(),
+    //   // When navigating to the "/second" route, build the SecondScreen widget.
+    //   '/index': (context) => Index(),
+    //   '/genre': (context) => Genre(booksGenre: []),
+    //   '/books': (context) => VariableBooks(books: []),
+    // },
   ));
 }
 

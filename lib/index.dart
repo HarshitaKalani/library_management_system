@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:loginapp/seats.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'main.dart';
@@ -156,6 +157,9 @@ class _IndexState extends State<Index> {
                               builder: (context) => Genre(
                                     booksGenre: booksGenre,
                                   )));
+                    } else if (_current == 0) {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Busseats()));
                     }
                   },
                   child: Icon(
@@ -283,12 +287,13 @@ class _IndexState extends State<Index> {
           setState(() {
             _currentIndex = index;
             if (index == 3) {
-              _auth.signOut();
-              // Navigator.push(
-              //     context, MaterialPageRoute(builder: (context) => HomePage()));
-              Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(builder: (context) => HomePage()),
-                  (route) => false);
+              showAlertDialog(context);
+              // _auth.signOut();
+              // // Navigator.push(
+              // //     context, MaterialPageRoute(builder: (context) => HomePage()));
+              // Navigator.of(context).pushAndRemoveUntil(
+              //     MaterialPageRoute(builder: (context) => HomePage()),
+              //     (route) => false);
             }
 
             // else if (index == 0) {
@@ -334,6 +339,43 @@ class _IndexState extends State<Index> {
           ),
         ],
       ),
+    );
+  }
+
+  showAlertDialog(BuildContext context) {
+    // set up the button
+    // Widget logOutButton = SalomonBottomBarItem(
+    //   icon: Icon(Icons.logout),
+    //   title: Text("LogOut"),
+    //   selectedColor: Colors.redAccent,
+    // );
+    Widget okButton = TextButton(
+      child: Text("Logout"),
+      onPressed: () {
+        _auth.signOut();
+        // Navigator.push(
+        //     context, MaterialPageRoute(builder: (context) => HomePage()));
+        Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => HomePage()),
+            (route) => false);
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("Logout Alert!!"),
+      content: Text("Are You Sure You Want To LogOut?"),
+      actions: [
+        okButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
     );
   }
 }
