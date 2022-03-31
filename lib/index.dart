@@ -315,11 +315,11 @@ class _IndexState extends State<Index> {
             //       MaterialPageRoute(builder: (context) => Verificatoin()));
             // }
             else if (index == 1) {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          AddUser("Hereit is", "Flipkart", 20)));
+              // Navigator.push(
+              //     context,
+              //     MaterialPageRoute(
+              //         builder: (context) =>
+              //             AddUser("Hereit is", "Flipkart", 20)));
             } else if (index == 2) {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => GetUserName()));

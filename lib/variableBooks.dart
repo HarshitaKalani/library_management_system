@@ -116,11 +116,11 @@ class _VariableBooksState extends State<VariableBooks> {
               Navigator.push(
                   context, MaterialPageRoute(builder: (context) => Index()));
             } else if (index == 1) {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          AddUser("Hereit is", "Flipkart", 20)));
+              // Navigator.push(
+              //     context,
+              //     MaterialPageRoute(
+              //         builder: (context) =>
+              //             AddUser("Hereit is", "Flipkart", 20)));
             } else if (index == 2) {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => GetUserName()));
