@@ -48,13 +48,13 @@ class _HomePageState extends State<HomePage> {
   // }
 
   getUser() async {
-    User firebaseUser = _auth.currentUser;
+    User? firebaseUser = _auth.currentUser;
     await firebaseUser.reload();
     firebaseUser = _auth.currentUser;
 
     if (firebaseUser != null) {
       setState(() {
-        this.user = firebaseUser;
+        this.user = firebaseUser!;
         this.isloggedin = true;
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => Index()));

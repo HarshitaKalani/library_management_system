@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:loginapp/seats.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'handleBarcode.dart';
 import 'main.dart';
 import 'temp.dart';
 import 'writeFireStore.dart';
@@ -52,17 +53,22 @@ class _IndexState extends State<Index> {
       // 'image':'https://images.unsplash.com/photo-1589188056053-28910dc61d38?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2264&q=80',
       'image': 'assets/54955.jpg',
       'description': 'Wohoo!!'
+    },
+    {
+      'title': 'Mark Presence',
+      'image': 'assets/5228739.jpg',
+      'description': 'Scan Qr Code to mark presence',
     }
   ];
 
   getUser() async {
-    User firebaseUser = _auth.currentUser;
+    User? firebaseUser = _auth.currentUser;
     await firebaseUser.reload();
     firebaseUser = _auth.currentUser;
 
     if (firebaseUser != null) {
       setState(() {
-        this.user = firebaseUser;
+        this.user = firebaseUser!;
         this.isloggedin = true;
       });
     }
@@ -160,11 +166,20 @@ class _IndexState extends State<Index> {
                     } else if (_current == 0) {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) => Busseats()));
+                    } else if (_current == 3) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => QRViewExample()));
                     }
                   },
-                  child: Icon(
-                    Icons.arrow_forward_ios,
-                  ),
+                  child: _current == 3
+                      ? Icon(
+                          Icons.camera_alt_outlined,
+                        )
+                      : Icon(
+                          Icons.arrow_forward_ios,
+                        ),
                 ),
               ),
             )
@@ -295,10 +310,9 @@ class _IndexState extends State<Index> {
               //     MaterialPageRoute(builder: (context) => HomePage()),
               //     (route) => false);
             }
-
             // else if (index == 0) {
             //   Navigator.push(context,
-            //       MaterialPageRoute(builder: (context) => SelectService()));
+            //       MaterialPageRoute(builder: (context) => Verificatoin()));
             // }
             else if (index == 1) {
               Navigator.push(

@@ -72,46 +72,46 @@ class _GenreState extends State<Genre> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      floatingActionButton: selectedService >= 0
-          ? FloatingActionButton(
-              onPressed: () {
-                // print(selectedService);
-                var genre = widget.booksGenre[selectedService].bookGenre;
-                print(genre);
-                List<Books> selectedBooks = <Books>[];
-                Future<Null> _listUser = FirebaseFirestore.instance
-                    .collection('Books')
-                    .where('bookGenre', isEqualTo: genre)
-                    .get()
-                    .then((QuerySnapshot querySnapshot) {
-                  var i = 0;
-                  var flag = 0;
-                  querySnapshot.docs.forEach(
-                    (doc) {
-                      var x = Books(doc['bookName'], doc['bookGenre'],
-                          doc['bookImage'], doc['bookAuthor']);
+      // floatingActionButton: selectedService >= 0
+      //     ? FloatingActionButton(
+      //         onPressed: () {
+      //           print(selectedService);
+      //           var genre = widget.booksGenre[selectedService].bookGenre;
+      //           print(genre);
+      // List<Books> selectedBooks = <Books>[];
+      //           Future<Null> _listUser = FirebaseFirestore.instance
+      //               .collection('Books')
+      //               .where('bookGenre', isEqualTo: genre)
+      //               .get()
+      //               .then((QuerySnapshot querySnapshot) {
+      //             var i = 0;
+      //             var flag = 0;
+      //             querySnapshot.docs.forEach(
+      //               (doc) {
+      //                 var x = Books(doc['bookName'], doc['bookGenre'],
+      //                     doc['bookImage'], doc['bookAuthor']);
 
-                      selectedBooks.insert(i, x);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => VariableBooks(
-                            books: selectedBooks,
-                          ),
-                        ),
-                      );
-                      // print(selectedBooks);
-                    },
-                  );
-                });
-              },
-              child: Icon(
-                Icons.arrow_forward_ios,
-                size: 20,
-              ),
-              backgroundColor: Colors.blue,
-            )
-          : null,
+      //                 selectedBooks.insert(i, x);
+      // Navigator.push(
+      //   context,
+      //   MaterialPageRoute(
+      //     builder: (context) => VariableBooks(
+      //       books: selectedBooks,
+      //     ),
+      //   ),
+      // );
+      //                 // print(selectedBooks);
+      //               },
+      //             );
+      //           });
+      //         },
+      //         child: Icon(
+      //           Icons.arrow_forward_ios,
+      //           size: 20,
+      //         ),
+      //         backgroundColor: Colors.blue,
+      //       )
+      //     : null,
       body: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
@@ -220,6 +220,34 @@ class _GenreState extends State<Genre> {
             selectedService = -1;
           else
             selectedService = index;
+          var genre = widget.booksGenre[selectedService].bookGenre;
+          print(genre);
+          List<Books> selectedBooks = <Books>[];
+          Future<Null> _listUser = FirebaseFirestore.instance
+              .collection('Books')
+              .where('bookGenre', isEqualTo: genre)
+              .get()
+              .then((QuerySnapshot querySnapshot) {
+            var i = 0;
+            var flag = 0;
+            querySnapshot.docs.forEach(
+              (doc) {
+                var x = Books(doc['bookName'], doc['bookGenre'],
+                    doc['bookImage'], doc['bookAuthor']);
+
+                selectedBooks.insert(i, x);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => VariableBooks(
+                      books: selectedBooks,
+                    ),
+                  ),
+                );
+                // print(selectedBooks);
+              },
+            );
+          });
         });
       },
       child: AnimatedContainer(

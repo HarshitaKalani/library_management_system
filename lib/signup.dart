@@ -33,7 +33,7 @@ class _SignupPageState extends State<SignupPage> {
       UserCredential user = await _auth.createUserWithEmailAndPassword(
           email: _email, password: _password);
       if (user != null) {
-        await _auth.currentUser.updateProfile(displayName: _name);
+        await _auth.currentUser?.updateProfile(displayName: _name);
       }
     } catch (e) {
       showError("Error Here");

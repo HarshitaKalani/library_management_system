@@ -1,167 +1,213 @@
-import 'animation/FadeAnimation.dart';
-import 'models/books.dart';
-import 'package:flutter/material.dart';
-// Import the firebase_core and cloud_firestore plugin
-import 'package:firebase_core/firebase_core.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'dart:developer';
+// import 'dart:io';
 
-class SelectService extends StatefulWidget {
-  // const SelectService({Key? key}) : super(key: key);
-  final List<Service> services;
-  SelectService({required this.services});
+// import 'package:flutter/foundation.dart';
+// import 'package:flutter/material.dart';
+// import 'package:qr_code_scanner/qr_code_scanner.dart';
 
-  @override
-  _SelectServiceState createState() => _SelectServiceState();
-}
+// // void main() => runApp(const MaterialApp(home: MyHome()));
 
-class _SelectServiceState extends State<SelectService> {
-  // List<Service> services = [
-  //   Service('Cleaning',
-  //       'https://img.icons8.com/external-vitaliy-gorbachev-flat-vitaly-gorbachev/2x/external-cleaning-labour-day-vitaliy-gorbachev-flat-vitaly-gorbachev.png'),
-  //   Service('Plumber',
-  //       'https://img.icons8.com/external-vitaliy-gorbachev-flat-vitaly-gorbachev/2x/external-plumber-labour-day-vitaliy-gorbachev-flat-vitaly-gorbachev.png'),
-  //   Service('Electrician',
-  //       'https://img.icons8.com/external-wanicon-flat-wanicon/2x/external-multimeter-car-service-wanicon-flat-wanicon.png'),
-  //   Service('Painter',
-  //       'https://img.icons8.com/external-itim2101-flat-itim2101/2x/external-painter-male-occupation-avatar-itim2101-flat-itim2101.png'),
-  //   Service('Carpenter', 'https://img.icons8.com/fluency/2x/drill.png'),
-  //   Service('Gardener',
-  //       'https://img.icons8.com/external-itim2101-flat-itim2101/2x/external-gardener-male-occupation-avatar-itim2101-flat-itim2101.png'),
-  //   Service('Tailor', 'https://img.icons8.com/fluency/2x/sewing-machine.png'),
-  //   Service('Maid', 'https://img.icons8.com/color/2x/housekeeper-female.png'),
-  //   Service('Driver',
-  //       'https://img.icons8.com/external-sbts2018-lineal-color-sbts2018/2x/external-driver-women-profession-sbts2018-lineal-color-sbts2018.png'),
-  //   Service('Cook',
-  //       'https://img.icons8.com/external-wanicon-flat-wanicon/2x/external-cooking-daily-routine-wanicon-flat-wanicon.png'),
-  // ];
+// // class MyHome extends StatelessWidget {
+// //   const MyHome({Key? key}) : super(key: key);
 
-  int selectedService = -1;
+// //   @override
+// //   Widget build(BuildContext context) {
+// //     return Scaffold(
+// //       appBar: AppBar(title: const Text('Flutter Demo Home Page')),
+// //       body: Center(
+// //         child: ElevatedButton(
+// //           onPressed: () {
+// //             Navigator.of(context).push(MaterialPageRoute(
+// //               builder: (context) => const QRViewExample(),
+// //             ));
+// //           },
+// //           child: const Text('qrView'),
+// //         ),
+// //       ),
+// //     );
+// //   }
+// // }
 
-  // List<Service> services2 = [
-  //   Service('Cleaning',
-  //       'https://img.icons8.com/external-vitaliy-gorbachev-flat-vitaly-gorbachev/2x/external-cleaning-labour-day-vitaliy-gorbachev-flat-vitaly-gorbachev.png'),
-  // ];
-  //  var count = 0;
+// class QRViewExample extends StatefulWidget {
+//   const QRViewExample({Key? key}) : super(key: key);
 
-  // void initState() {
-  //   final Future<Null> _listUser = FirebaseFirestore.instance
-  //       .collection('users')
-  //       .get()
-  //       .then((QuerySnapshot querySnapshot) {
-  //     var i = 0;
-  //     querySnapshot.docs.forEach((doc) {
-  //       // print(doc["full_name"]);
-  //       var x = Service(doc["full_name"],
-  //           'https://img.icons8.com/external-vitaliy-gorbachev-flat-vitaly-gorbachev/2x/external-cleaning-labour-day-vitaliy-gorbachev-flat-vitaly-gorbachev.png');
-  //       services2.insert(i, x);
-  //       // print(services2);
-  //       count = count + 1;
-  //     });
-  //   });
-  //   super.initState();
-  // }
+//   @override
+//   State<StatefulWidget> createState() => _QRViewExampleState();
+// }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.white,
-        floatingActionButton: selectedService >= 0
-            ? FloatingActionButton(
-                onPressed: () {},
-                child: Icon(
-                  Icons.arrow_forward_ios,
-                  size: 20,
-                ),
-                backgroundColor: Colors.blue,
-              )
-            : null,
-        body: NestedScrollView(
-          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-            return <Widget>[
-              SliverToBoxAdapter(
-                  child: FadeAnimation(
-                1.2,
-                Padding(
-                  padding: EdgeInsets.only(top: 120.0, right: 20.0, left: 20.0),
-                  child: Text(
-                    'Which Book \nyou prefer?',
-                    style: TextStyle(
-                      fontSize: 40,
-                      color: Colors.grey.shade900,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ))
-            ];
-          },
-          body: Padding(
-            padding: EdgeInsets.all(20.0),
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Expanded(
-                    child: GridView.builder(
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          childAspectRatio: 1.0,
-                          crossAxisSpacing: 20.0,
-                          mainAxisSpacing: 20.0,
-                        ),
-                        physics: NeverScrollableScrollPhysics(),
-                        itemCount: widget.services.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          print(widget.services.length);
-                          print("here2002");
-                          return FadeAnimation(
-                              (1.0 + index) / 4,
-                              serviceContainer(widget.services[index].imageURL,
-                                  widget.services[index].name, index));
-                        }),
-                  ),
-                ]),
-          ),
-        ));
-  }
+// class _QRViewExampleState extends State<QRViewExample> {
+//   Barcode? result;
+//   QRViewController? controller;
+//   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
 
-  serviceContainer(String image, String name, int index) {
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          if (selectedService == index)
-            selectedService = -1;
-          else
-            selectedService = index;
-        });
-      },
-      child: AnimatedContainer(
-        duration: Duration(milliseconds: 300),
-        padding: EdgeInsets.all(10.0),
-        decoration: BoxDecoration(
-          color: selectedService == index
-              ? Colors.blue.shade50
-              : Colors.grey.shade100,
-          border: Border.all(
-            color: selectedService == index
-                ? Colors.blue
-                : Colors.blue.withOpacity(0),
-            width: 2.0,
-          ),
-          borderRadius: BorderRadius.circular(20.0),
-        ),
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Image.network(image, height: 80),
-              SizedBox(
-                height: 20,
-              ),
-              Text(
-                name,
-                style: TextStyle(fontSize: 20),
-              )
-            ]),
-      ),
-    );
-  }
-}
+//   // In order to get hot reload to work we need to pause the camera if the platform
+//   // is android, or resume the camera if the platform is iOS.
+//   @override
+//   void reassemble() {
+//     super.reassemble();
+//     if (Platform.isAndroid) {
+//       controller!.pauseCamera();
+//     }
+//     controller!.resumeCamera();
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       body: Column(
+//         children: <Widget>[
+//           Expanded(flex: 4, child: _buildQrView(context)),
+//           Expanded(
+//             flex: 1,
+//             child: FittedBox(
+//               fit: BoxFit.contain,
+//               child: Column(
+//                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                 children: <Widget>[
+//                   if (result != null)
+//                     Text(
+//                         'Barcode Type: ${describeEnum(result!.format)}   Data: ${result!.code}')
+//                   else
+//                     const Text('Scan a code'),
+//                   Row(
+//                     mainAxisAlignment: MainAxisAlignment.center,
+//                     crossAxisAlignment: CrossAxisAlignment.center,
+//                     children: <Widget>[
+//                       Container(
+//                         margin: const EdgeInsets.all(8),
+//                         child: ElevatedButton(
+//                           onPressed: () async {
+//                             await controller?.toggleFlash();
+//                             setState(() {});
+//                           },
+//                           child: FutureBuilder(
+//                             future: controller?.getFlashStatus(),
+//                             // builder: (context, snapshot) {
+//                             //   return Text('Flash: ${snapshot.data}');
+//                             // },
+//                             builder: (context, snapshot) {
+//                               return snapshot.data == true
+//                                   ? Icon(
+//                                       Icons.flash_off_rounded,
+//                                     )
+//                                   : Icon(
+//                                       Icons.flash_on_rounded,
+//                                     );
+//                             },
+//                           ),
+//                         ),
+//                       ),
+//                       Container(
+//                         margin: const EdgeInsets.all(8),
+//                         child: ElevatedButton(
+//                           onPressed: () async {
+//                             await controller?.flipCamera();
+//                             setState(() {});
+//                           },
+//                           child: Icon(
+//                             Icons.cameraswitch_rounded,
+//                           ),
+//                           // child: FutureBuilder(
+//                           //   future: controller?.getCameraInfo(),
+//                           //   builder: (context, snapshot) {
+//                           //     if (snapshot.data != null) {
+//                           //       return Text(
+//                           //           'Camera facing ${describeEnum(snapshot.data!)}');
+//                           //     } else {
+//                           //       return const Text('loading');
+//                           //     }
+//                           //   },
+//                           // ),
+//                         ),
+//                       )
+//                     ],
+//                   ),
+//                   Row(
+//                     mainAxisAlignment: MainAxisAlignment.center,
+//                     crossAxisAlignment: CrossAxisAlignment.center,
+//                     children: <Widget>[
+//                       Container(
+//                         margin: const EdgeInsets.all(8),
+//                         child: ElevatedButton(
+//                           onPressed: () async {
+//                             await controller?.pauseCamera();
+//                           },
+//                           // child: const Text('pause',
+//                           //     style: TextStyle(fontSize: 20)),
+//                           child: Icon(
+//                             Icons.pause_circle_rounded,
+//                           ),
+//                         ),
+//                       ),
+//                       Container(
+//                         margin: const EdgeInsets.all(8),
+//                         child: ElevatedButton(
+//                           onPressed: () async {
+//                             await controller?.resumeCamera();
+//                           },
+//                           // child: const Text('resume',
+//                           //     style: TextStyle(fontSize: 20)),
+//                           child: Icon(
+//                             Icons.play_arrow_rounded,
+//                           ),
+//                         ),
+//                       )
+//                     ],
+//                   ),
+//                 ],
+//               ),
+//             ),
+//           )
+//         ],
+//       ),
+//     );
+//   }
+
+//   Widget _buildQrView(BuildContext context) {
+//     // For this example we check how width or tall the device is and change the scanArea and overlay accordingly.
+//     var scanArea = (MediaQuery.of(context).size.width < 400 ||
+//             MediaQuery.of(context).size.height < 400)
+//         ? 150.0
+//         : 300.0;
+//     // To ensure the Scanner view is properly sizes after rotation
+//     // we need to listen for Flutter SizeChanged notification and update controller
+//     return QRView(
+//       key: qrKey,
+//       onQRViewCreated: _onQRViewCreated,
+//       overlay: QrScannerOverlayShape(
+//           borderColor: Colors.red,
+//           borderRadius: 10,
+//           borderLength: 30,
+//           borderWidth: 10,
+//           cutOutSize: scanArea),
+//       onPermissionSet: (ctrl, p) => _onPermissionSet(context, ctrl, p),
+//     );
+//   }
+
+//   void _onQRViewCreated(QRViewController controller) {
+//     setState(() {
+//       this.controller = controller;
+//     });
+//     controller.scannedDataStream.listen((scanData) {
+//       setState(() {
+//         //entire procedure to mark boolean true or false
+//         result = scanData;
+//       });
+//     });
+//   }
+
+//   void _onPermissionSet(BuildContext context, QRViewController ctrl, bool p) {
+//     log('${DateTime.now().toIso8601String()}_onPermissionSet $p');
+//     if (!p) {
+//       ScaffoldMessenger.of(context).showSnackBar(
+//         const SnackBar(content: Text('no Permission')),
+//       );
+//     }
+//   }
+
+//   @override
+//   void dispose() {
+//     controller?.dispose();
+//     super.dispose();
+//   }
+// }

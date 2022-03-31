@@ -1,9 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:loginapp/bookIssue.dart';
 import 'package:loginapp/index.dart';
 import 'package:loginapp/readFireStore.dart';
+import 'package:loginapp/temp.dart';
 import 'package:loginapp/writeFireStore.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
-
+import 'package:loginapp/bookIssue.dart';
 import 'animation/FadeAnimation.dart';
 import 'main.dart';
 import 'models/books.dart';
@@ -35,10 +37,18 @@ class _VariableBooksState extends State<VariableBooks> {
       floatingActionButton: selectedService >= 0
           ? FloatingActionButton(
               onPressed: () {
-                print(selectedService);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DetailsScreen(
+                      book: widget.books[selectedService],
+                      bookHere: widget.books,
+                    ),
+                  ),
+                );
               },
               child: Icon(
-                Icons.arrow_forward_ios,
+                Icons.download,
                 size: 20,
               ),
               backgroundColor: Colors.blue,
@@ -53,7 +63,7 @@ class _VariableBooksState extends State<VariableBooks> {
               Padding(
                 padding: EdgeInsets.only(top: 120.0, right: 20.0, left: 20.0),
                 child: Text(
-                  'Select Books!',
+                  'Select Book \nto Issue!',
                   style: TextStyle(
                     fontSize: 40,
                     color: Colors.grey.shade900,

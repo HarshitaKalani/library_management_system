@@ -2,6 +2,12 @@
   "configVersion": 2,
   "packages": [
     {
+      "name": "animate_do",
+      "rootUri": "file:///C:/Users/lenovo/Desktop/development/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/animate_do-2.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "async",
       "rootUri": "file:///C:/Users/lenovo/Desktop/development/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/async-2.8.2",
       "packageUri": "lib/",
@@ -158,6 +164,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "flutter_email_sender",
+      "rootUri": "file:///C:/Users/lenovo/Desktop/development/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_email_sender-5.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "flutter_lints",
       "rootUri": "file:///C:/Users/lenovo/Desktop/development/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_lints-1.0.4",
       "packageUri": "lib/",
@@ -172,6 +184,12 @@
     {
       "name": "flutter_test",
       "rootUri": "file:///C:/Users/lenovo/Desktop/development/sdks/flutter/packages/flutter_test",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "flutter_verification_code",
+      "rootUri": "file:///C:/Users/lenovo/Desktop/development/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_verification_code-1.1.2+1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -266,6 +284,12 @@
       "languageVersion": "2.1"
     },
     {
+      "name": "qr_code_scanner",
+      "rootUri": "file:///C:/Users/lenovo/Desktop/development/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/qr_code_scanner-0.7.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "quiver",
       "rootUri": "file:///C:/Users/lenovo/Desktop/development/sdks/flutter/.pub-cache/hosted/pub.dartlang.org/quiver-2.1.5",
       "packageUri": "lib/",
@@ -356,7 +380,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2022-03-28T14:49:25.211909Z",
+  "generated": "2022-03-30T14:12:24.285528Z",
   "generator": "pub",
   "generatorVersion": "2.16.1"
 }
