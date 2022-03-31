@@ -45,6 +45,35 @@ class _QRViewExampleState extends State<QRViewExample> {
   QRViewController? controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
 
+  CollectionReference users = FirebaseFirestore.instance.collection('InTime');
+  markPresence() {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    DateTime now = DateTime.now();
+
+    final User user = _auth.currentUser;
+    final username = user.displayName;
+    // Call the user's CollectionReference to add a new user
+    return users
+        .add({
+          'personName': username, // John Doe
+          'entryTime': now, // Stokes and Sons
+          // 'age': age // 42
+        })
+        .then(
+          (value) => {
+            print("User Added"),
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Index(),
+              ),
+              (route) => false,
+            ),
+          },
+        )
+        .catchError((error) => print("Failed to add user: $error"));
+  }
+
   // In order to get hot reload to work we need to pause the camera if the platform
   // is android, or resume the camera if the platform is iOS.
   @override
@@ -54,6 +83,10 @@ class _QRViewExampleState extends State<QRViewExample> {
       controller!.pauseCamera();
     }
     controller!.resumeCamera();
+  }
+
+  void initState() {
+    // this.addUser();
   }
 
   @override
@@ -87,7 +120,7 @@ class _QRViewExampleState extends State<QRViewExample> {
                     children: <Widget>[
                       Container(
                         margin: const EdgeInsets.all(8),
-                        child: ElevatedButton(
+                        child: FlatButton(
                           onPressed: () async {
                             await controller?.toggleFlash();
                             setState(() {});
@@ -111,7 +144,7 @@ class _QRViewExampleState extends State<QRViewExample> {
                       ),
                       Container(
                         margin: const EdgeInsets.all(8),
-                        child: ElevatedButton(
+                        child: FlatButton(
                           onPressed: () async {
                             await controller?.flipCamera();
                             setState(() {});
@@ -131,50 +164,13 @@ class _QRViewExampleState extends State<QRViewExample> {
                           //   },
                           // ),
                         ),
-                      )
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
+                      ),
                       Container(
                         margin: const EdgeInsets.all(8),
-                        child: ElevatedButton(
+                        child: FlatButton(
                           onPressed: () async {
                             await controller?.pauseCamera();
-                            // DateTime now = DateTime.now();
-                            // CollectionReference users =
-                            //     FirebaseFirestore.instance.collection('InTime');
-                            // Future<void> addUser() {
-                            //   final FirebaseAuth _auth = FirebaseAuth.instance;
-
-                            //   final User user = _auth.currentUser;
-                            //   final username = user.displayName;
-                            //   // Call the user's CollectionReference to add a new user
-                            //   return users
-                            //       .add({
-                            //         'personName': username, // John Doe
-                            //         'entryTime': now, // Stokes and Sons
-                            //         // 'age': age // 42
-                            //       })
-                            //       .then(
-                            //         (value) => {
-                            //           print("User Added"),
-                            //           Navigator.pushAndRemoveUntil(
-                            //             context,
-                            //             MaterialPageRoute(
-                            //               builder: (context) => Index(),
-                            //             ),
-                            //             (route) => false,
-                            //           ),
-                            //         },
-                            //       )
-                            //       .catchError((error) =>
-                            //           print("Failed to add user: $error"));
-                            // }
-
-                            // addUser();
+                            markPresence();
                           },
                           // child: const Text('pause',
                           //     style: TextStyle(fontSize: 20)),
@@ -185,7 +181,7 @@ class _QRViewExampleState extends State<QRViewExample> {
                       ),
                       Container(
                         margin: const EdgeInsets.all(8),
-                        child: ElevatedButton(
+                        child: FlatButton(
                           onPressed: () async {
                             await controller?.resumeCamera();
                           },
@@ -198,6 +194,39 @@ class _QRViewExampleState extends State<QRViewExample> {
                       )
                     ],
                   ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.center,
+                  //   crossAxisAlignment: CrossAxisAlignment.center,
+                  //   children: <Widget>[
+                  //     Container(
+                  //       margin: const EdgeInsets.all(8),
+                  //       child: ElevatedButton(
+                  //         onPressed: () async {
+                  //           await controller?.pauseCamera();
+                  //           markPresence();
+                  //         },
+                  //         // child: const Text('pause',
+                  //         //     style: TextStyle(fontSize: 20)),
+                  //         child: Icon(
+                  //           Icons.pause_circle_rounded,
+                  //         ),
+                  //       ),
+                  //     ),
+                  //     Container(
+                  //       margin: const EdgeInsets.all(8),
+                  //       child: ElevatedButton(
+                  //         onPressed: () async {
+                  //           await controller?.resumeCamera();
+                  //         },
+                  //         // child: const Text('resume',
+                  //         //     style: TextStyle(fontSize: 20)),
+                  //         child: Icon(
+                  //           Icons.play_arrow_rounded,
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
                 ],
               ),
             ),
@@ -237,74 +266,10 @@ class _QRViewExampleState extends State<QRViewExample> {
         () {
           //entire procedure to mark boolean true or false
           result = scanData;
-          // DateTime now = DateTime.now();
-          // CollectionReference users =
-          //     FirebaseFirestore.instance.collection('InTime');
-          // Future<void> addUser() {
-          //   final FirebaseAuth _auth = FirebaseAuth.instance;
-
-          //   final User user = _auth.currentUser;
-          //   final username = user.displayName;
-          //   // Call the user's CollectionReference to add a new user
-          //   return users
-          //       .add({
-          //         'personName': username, // John Doe
-          //         'entryTime': now, // Stokes and Sons
-          //         // 'age': age // 42
-          //       })
-          //       .then(
-          //         (value) => {
-          //           print("User Added"),
-          //           Navigator.pushAndRemoveUntil(
-          //             context,
-          //             MaterialPageRoute(
-          //               builder: (context) => Index(),
-          //             ),
-          //             (route) => false,
-          //           ),
-          //         },
-          //       )
-          //       .catchError((error) => print("Failed to add user: $error"));
-          // }
-
-          // addUser();
-          // result = now as Barcode?;
-
-          // Navigator.push(
-          //     context, MaterialPageRoute(builder: (context) => Index()));
         },
       );
-      CollectionReference users =
-          FirebaseFirestore.instance.collection('InTime');
-      Future<void> addUser() {
-        final FirebaseAuth _auth = FirebaseAuth.instance;
-        DateTime now = DateTime.now();
 
-        final User user = _auth.currentUser;
-        final username = user.displayName;
-        // Call the user's CollectionReference to add a new user
-        return users
-            .add({
-              'personName': username, // John Doe
-              'entryTime': now, // Stokes and Sons
-              // 'age': age // 42
-            })
-            .then(
-              (value) => {
-                print("User Added"),
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => Index(),
-                  ),
-                  (route) => false,
-                ),
-              },
-            )
-            .catchError((error) => print("Failed to add user: $error"));
-      }
-
-      addUser();
+      // addUser();
     });
   }
 
