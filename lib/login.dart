@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_signin_button/button_view.dart';
+import 'package:flutter_signin_button/flutter_signin_button.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:loginapp/signup.dart';
 import 'index.dart';
 
 class LoginPage extends StatefulWidget {
@@ -12,6 +16,30 @@ class _LoginPageState extends State<LoginPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   late String _email, _password;
+  Future<UserCredential> googleSignIn() async {
+    GoogleSignIn googleSignIn = GoogleSignIn();
+    GoogleSignInAccount googleUser = await googleSignIn.signIn();
+    if (googleUser != null) {
+      GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+
+      if (googleAuth.idToken != null && googleAuth.accessToken != null) {
+        final AuthCredential credential = GoogleAuthProvider.credential(
+            accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
+
+        final UserCredential user =
+            await _auth.signInWithCredential(credential);
+
+        // await Navigator.pushReplacementNamed(context, "/");
+        await Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Index()));
+
+        return user;
+      } else {
+        throw StateError('Missing Google Auth Token');
+      }
+    } else
+      throw StateError('Sign in Aborted');
+  }
 
   login() async {
     if (_formKey != null &&
@@ -165,6 +193,11 @@ class _LoginPageState extends State<LoginPage> {
                                     onSaved: (input) => _password = input!,
                                   ),
                                 ),
+                                SizedBox(height: 20.0),
+                                Container(
+                                    child: SignInButton(Buttons.Google,
+                                        text: "Log In with Google",
+                                        onPressed: googleSignIn)),
                               ],
                             ),
                           ),
@@ -210,12 +243,22 @@ class _LoginPageState extends State<LoginPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text("Don't Have An Account?"),
-                      Text(
-                        "Sign Up",
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 18,
+                      GestureDetector(
+                        child: Text(
+                          "Sign Up",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 18,
+                          ),
                         ),
+                        onTap: () {
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => SignupPage(),
+                              ),
+                              (route) => false);
+                        },
                       ),
                     ],
                   ),

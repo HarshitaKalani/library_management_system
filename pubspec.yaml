@@ -53,8 +53,15 @@ dependencies:
   animate_do: ^2.1.0
   flutter_verification_code: ^1.1.2+1
   toggle_switch: ^1.4.0
+  http: ^0.12.2
+  flutter_svg: ^1.0.3
+  mailer: ^3.3.0
+  flutter_local_notifications: ^4.0.1+2
+  auto_size_text: ^3.0.0
 
 dev_dependencies:
+  integration_test:
+    sdk: flutter
   flutter_test:
     sdk: flutter
   
@@ -86,6 +93,7 @@ flutter:
     - assets/54955.jpg
     - assets/bg.png
     - assets/5228739.jpg
+    - assets/bookReturn.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

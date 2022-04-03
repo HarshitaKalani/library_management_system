@@ -1,213 +1,103 @@
-// import 'dart:developer';
-// import 'dart:io';
+import 'package:mailer/mailer.dart';
+import 'package:mailer/smtp_server.dart';
+import 'package:flutter/material.dart';
 
-// import 'package:flutter/foundation.dart';
-// import 'package:flutter/material.dart';
-// import 'package:qr_code_scanner/qr_code_scanner.dart';
+class SendMail extends StatefulWidget {
+  const SendMail({Key? key}) : super(key: key);
 
-// // void main() => runApp(const MaterialApp(home: MyHome()));
+  @override
+  State<SendMail> createState() => _SendMailState();
+}
 
-// // class MyHome extends StatelessWidget {
-// //   const MyHome({Key? key}) : super(key: key);
+class _SendMailState extends State<SendMail> {
+  sendMail(String email, String personName, String bookName) async {
+    String username = 'goswamipranav11@gmail.com';
+    String password = 'Pranav@2002';
 
-// //   @override
-// //   Widget build(BuildContext context) {
-// //     return Scaffold(
-// //       appBar: AppBar(title: const Text('Flutter Demo Home Page')),
-// //       body: Center(
-// //         child: ElevatedButton(
-// //           onPressed: () {
-// //             Navigator.of(context).push(MaterialPageRoute(
-// //               builder: (context) => const QRViewExample(),
-// //             ));
-// //           },
-// //           child: const Text('qrView'),
-// //         ),
-// //       ),
-// //     );
-// //   }
-// // }
+    final smtpServer = gmail(username, password);
+    // Use the SmtpServer class to configure an SMTP server:
+    // final smtpServer = SmtpServer('smtp.domain.com');
+    // See the named arguments of SmtpServer for further configuration
+    // options.
 
-// class QRViewExample extends StatefulWidget {
-//   const QRViewExample({Key? key}) : super(key: key);
+    // Create our message.
+    final message = Message()
+      ..from = Address(username, username.toString())
+      ..recipients.add(email)
+      // ..ccRecipients.addAll(['destCc1@example.com', 'destCc2@example.com'])
+      // ..bccRecipients.add(Address('bccAddress@example.com'))
+      ..subject = 'Book Issue @Library IITJ::  ${DateTime.now()}'
+      ..text = 'Heyy ' +
+          personName +
+          '!' +
+          '\nYou have successfully Issued ' +
+          bookName +
+          ' on ${DateTime.now()}' +
+          '\nYou will have to return the book within 7 working days else you will be penalised!!' +
+          '\nRegards.';
+    // ..html = "<h1>Test</h1>\n<p>Hey! Here's some HTML content</p>";
 
-//   @override
-//   State<StatefulWidget> createState() => _QRViewExampleState();
-// }
+    try {
+      final sendReport = await send(message, smtpServer);
+      print('Message sent: ' + sendReport.toString());
+    } on MailerException catch (e) {
+      print('Message not sent.');
+      for (var p in e.problems) {
+        print('Problem: ${p.code}: ${p.msg}');
+      }
+    }
+    // DONE
 
-// class _QRViewExampleState extends State<QRViewExample> {
-//   Barcode? result;
-//   QRViewController? controller;
-//   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
+    // Let's send another message using a slightly different syntax:
+    //
+    // Addresses without a name part can be set directly.
+    // For instance `..recipients.add('destination@example.com')`
+    // If you want to display a name part you have to create an
+    // Address object: `new Address('destination@example.com', 'Display name part')`
+    // Creating and adding an Address object without a name part
+    // `new Address('destination@example.com')` is equivalent to
+    // adding the mail address as `String`.
 
-//   // In order to get hot reload to work we need to pause the camera if the platform
-//   // is android, or resume the camera if the platform is iOS.
-//   @override
-//   void reassemble() {
-//     super.reassemble();
-//     if (Platform.isAndroid) {
-//       controller!.pauseCamera();
-//     }
-//     controller!.resumeCamera();
-//   }
+    // final equivalentMessage = Message()
+    //   ..from = Address(username, 'Your name 😀')
+    //   ..recipients.add(Address('goswamipranav11@gmail.com'))
+    //   // ..ccRecipients
+    //   //     .addAll([Address('destCc1@example.com'), 'destCc2@example.com'])
+    //   // ..bccRecipients.add('bccAddress@example.com')
+    //   ..subject = 'Test Dart Mailer library :: 😀 :: ${DateTime.now()}'
+    //   ..text = 'This is the plain text.\nThis is line 2 of the text part.'
+    //   ..html =
+    //       '<h1>Test</h1>\n<p>Hey! Here is some HTML content</p><img src="cid:myimg@3.141"/>'
+    //   ..attachments = [
+    //     // FileAttachment(File('exploits_of_a_mom.png'))
+    //     //   ..location = Location.inline
+    //     //   ..cid = '<myimg@3.141>'
+    //   ];
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: Column(
-//         children: <Widget>[
-//           Expanded(flex: 4, child: _buildQrView(context)),
-//           Expanded(
-//             flex: 1,
-//             child: FittedBox(
-//               fit: BoxFit.contain,
-//               child: Column(
-//                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                 children: <Widget>[
-//                   if (result != null)
-//                     Text(
-//                         'Barcode Type: ${describeEnum(result!.format)}   Data: ${result!.code}')
-//                   else
-//                     const Text('Scan a code'),
-//                   Row(
-//                     mainAxisAlignment: MainAxisAlignment.center,
-//                     crossAxisAlignment: CrossAxisAlignment.center,
-//                     children: <Widget>[
-//                       Container(
-//                         margin: const EdgeInsets.all(8),
-//                         child: ElevatedButton(
-//                           onPressed: () async {
-//                             await controller?.toggleFlash();
-//                             setState(() {});
-//                           },
-//                           child: FutureBuilder(
-//                             future: controller?.getFlashStatus(),
-//                             // builder: (context, snapshot) {
-//                             //   return Text('Flash: ${snapshot.data}');
-//                             // },
-//                             builder: (context, snapshot) {
-//                               return snapshot.data == true
-//                                   ? Icon(
-//                                       Icons.flash_off_rounded,
-//                                     )
-//                                   : Icon(
-//                                       Icons.flash_on_rounded,
-//                                     );
-//                             },
-//                           ),
-//                         ),
-//                       ),
-//                       Container(
-//                         margin: const EdgeInsets.all(8),
-//                         child: ElevatedButton(
-//                           onPressed: () async {
-//                             await controller?.flipCamera();
-//                             setState(() {});
-//                           },
-//                           child: Icon(
-//                             Icons.cameraswitch_rounded,
-//                           ),
-//                           // child: FutureBuilder(
-//                           //   future: controller?.getCameraInfo(),
-//                           //   builder: (context, snapshot) {
-//                           //     if (snapshot.data != null) {
-//                           //       return Text(
-//                           //           'Camera facing ${describeEnum(snapshot.data!)}');
-//                           //     } else {
-//                           //       return const Text('loading');
-//                           //     }
-//                           //   },
-//                           // ),
-//                         ),
-//                       )
-//                     ],
-//                   ),
-//                   Row(
-//                     mainAxisAlignment: MainAxisAlignment.center,
-//                     crossAxisAlignment: CrossAxisAlignment.center,
-//                     children: <Widget>[
-//                       Container(
-//                         margin: const EdgeInsets.all(8),
-//                         child: ElevatedButton(
-//                           onPressed: () async {
-//                             await controller?.pauseCamera();
-//                           },
-//                           // child: const Text('pause',
-//                           //     style: TextStyle(fontSize: 20)),
-//                           child: Icon(
-//                             Icons.pause_circle_rounded,
-//                           ),
-//                         ),
-//                       ),
-//                       Container(
-//                         margin: const EdgeInsets.all(8),
-//                         child: ElevatedButton(
-//                           onPressed: () async {
-//                             await controller?.resumeCamera();
-//                           },
-//                           // child: const Text('resume',
-//                           //     style: TextStyle(fontSize: 20)),
-//                           child: Icon(
-//                             Icons.play_arrow_rounded,
-//                           ),
-//                         ),
-//                       )
-//                     ],
-//                   ),
-//                 ],
-//               ),
-//             ),
-//           )
-//         ],
-//       ),
-//     );
-//   }
+    final sendReport2 = await send(message, smtpServer);
 
-//   Widget _buildQrView(BuildContext context) {
-//     // For this example we check how width or tall the device is and change the scanArea and overlay accordingly.
-//     var scanArea = (MediaQuery.of(context).size.width < 400 ||
-//             MediaQuery.of(context).size.height < 400)
-//         ? 150.0
-//         : 300.0;
-//     // To ensure the Scanner view is properly sizes after rotation
-//     // we need to listen for Flutter SizeChanged notification and update controller
-//     return QRView(
-//       key: qrKey,
-//       onQRViewCreated: _onQRViewCreated,
-//       overlay: QrScannerOverlayShape(
-//           borderColor: Colors.red,
-//           borderRadius: 10,
-//           borderLength: 30,
-//           borderWidth: 10,
-//           cutOutSize: scanArea),
-//       onPermissionSet: (ctrl, p) => _onPermissionSet(context, ctrl, p),
-//     );
-//   }
+    // Sending multiple messages with the same connection
+    //
+    // Create a smtp client that will persist the connection
+    var connection = PersistentConnection(smtpServer);
 
-//   void _onQRViewCreated(QRViewController controller) {
-//     setState(() {
-//       this.controller = controller;
-//     });
-//     controller.scannedDataStream.listen((scanData) {
-//       setState(() {
-//         //entire procedure to mark boolean true or false
-//         result = scanData;
-//       });
-//     });
-//   }
+    // Send the first message
+    await connection.send(message);
 
-//   void _onPermissionSet(BuildContext context, QRViewController ctrl, bool p) {
-//     log('${DateTime.now().toIso8601String()}_onPermissionSet $p');
-//     if (!p) {
-//       ScaffoldMessenger.of(context).showSnackBar(
-//         const SnackBar(content: Text('no Permission')),
-//       );
-//     }
-//   }
+    // send the equivalent message
+    // await connection.send(equivalentMessage);
 
-//   @override
-//   void dispose() {
-//     controller?.dispose();
-//     super.dispose();
-//   }
-// }
+    // close the connection
+    await connection.close();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      onPressed: () => sendMail('goswami.4@iitj.ac.in', 'Pranav', 'HEHEHEH'),
+      child: Text(
+        "Add User",
+      ),
+    );
+  }
+}

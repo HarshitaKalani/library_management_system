@@ -6,6 +6,7 @@ import 'package:loginapp/variableBooks.dart';
 import 'package:loginapp/writeFireStore.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'animation/FadeAnimation.dart';
+import 'getUserActivity.dart';
 import 'models/books.dart';
 import 'package:flutter/material.dart';
 // Import the firebase_core and cloud_firestore plugin
@@ -178,7 +179,7 @@ class _GenreState extends State<Genre> {
               //             AddUser("Hereit is", "Flipkart", 20)));
             } else if (index == 2) {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => GetUserName()));
+                  MaterialPageRoute(builder: (context) => GetUserActivity()));
             }
           });
         },
@@ -232,10 +233,17 @@ class _GenreState extends State<Genre> {
             var flag = 0;
             querySnapshot.docs.forEach(
               (doc) {
-                var x = Books(doc['bookName'], doc['bookGenre'],
-                    doc['bookImage'], doc['bookAuthor']);
+                var x = Books(
+                    doc['bookName'],
+                    doc['bookGenre'],
+                    doc['bookImage'],
+                    doc['bookAuthor'],
+                    doc['bookDescription'],
+                    doc['bookIssued'],
+                    doc.id.toString());
 
                 selectedBooks.insert(i, x);
+
                 Navigator.push(
                   context,
                   MaterialPageRoute(

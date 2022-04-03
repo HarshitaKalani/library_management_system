@@ -33,6 +33,10 @@ class Books {
   late final String bookGenre;
   late final String bookImage;
   late final String bookAuthor;
+  late final String bookDescription;
+  late final bool bookIssued;
+  late final String bookId;
 
-  Books(this.bookName, this.bookGenre, this.bookImage, this.bookAuthor);
+  Books(this.bookName, this.bookGenre, this.bookImage, this.bookAuthor,
+      this.bookDescription, this.bookIssued, this.bookId);
 }

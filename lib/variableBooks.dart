@@ -7,6 +7,7 @@ import 'package:loginapp/writeFireStore.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:loginapp/bookIssue.dart';
 import 'animation/FadeAnimation.dart';
+import 'getUserActivity.dart';
 import 'main.dart';
 import 'models/books.dart';
 import 'package:flutter/material.dart';
@@ -123,7 +124,7 @@ class _VariableBooksState extends State<VariableBooks> {
               //             AddUser("Hereit is", "Flipkart", 20)));
             } else if (index == 2) {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => GetUserName()));
+                  MaterialPageRoute(builder: (context) => GetUserActivity()));
             }
           });
         },

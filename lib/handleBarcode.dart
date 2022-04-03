@@ -41,6 +41,7 @@ class QRViewExample extends StatefulWidget {
 }
 
 class _QRViewExampleState extends State<QRViewExample> {
+  int flag = 0;
   Barcode? result;
   QRViewController? controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
@@ -170,7 +171,7 @@ class _QRViewExampleState extends State<QRViewExample> {
                         child: FlatButton(
                           onPressed: () async {
                             await controller?.pauseCamera();
-                            markPresence();
+                            // markPresence();
                           },
                           // child: const Text('pause',
                           //     style: TextStyle(fontSize: 20)),
@@ -266,10 +267,12 @@ class _QRViewExampleState extends State<QRViewExample> {
         () {
           //entire procedure to mark boolean true or false
           result = scanData;
+          if (flag == 0) {
+            markPresence();
+            flag = 1;
+          }
         },
       );
-
-      // addUser();
     });
   }
 

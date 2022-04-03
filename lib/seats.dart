@@ -7,6 +7,8 @@ import 'package:loginapp/readFireStore.dart';
 import 'package:loginapp/writeFireStore.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
+import 'getUserActivity.dart';
+
 class Busseats extends StatefulWidget {
   const Busseats({Key? key}) : super(key: key);
 
@@ -142,7 +144,7 @@ class _BusseatsState extends State<Busseats> {
               //             AddUser("Hereit is", "Flipkart", 20)));
             } else if (index == 2) {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => GetUserName()));
+                  MaterialPageRoute(builder: (context) => GetUserActivity()));
             }
           });
         },

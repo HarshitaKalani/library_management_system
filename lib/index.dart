@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:loginapp/getUserIssuedBooks.dart';
 import 'package:loginapp/seats.dart';
+import 'package:loginapp/userProfile.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'getUserActivity.dart';
 import 'handleBarcode.dart';
 import 'main.dart';
 import 'temp.dart';
@@ -10,6 +13,7 @@ import 'writeFireStore.dart';
 import 'readFireStore.dart';
 import 'models/books.dart';
 import 'genre.dart';
+import 'package:toggle_switch/toggle_switch.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -58,6 +62,11 @@ class _IndexState extends State<Index> {
       'title': 'Mark Presence',
       'image': 'assets/5228739.jpg',
       'description': 'Scan Qr Code to mark presence',
+    },
+    {
+      'title': 'My Issued Books',
+      'image': 'assets/bookReturn.png',
+      'description': 'Tap to see books issued by you',
     }
   ];
 
@@ -104,8 +113,14 @@ class _IndexState extends State<Index> {
       var i = 0;
       var flag = 0;
       querySnapshot.docs.forEach((doc) {
-        var x = Books(doc['bookName'], doc['bookGenre'], doc['bookImage'],
-            doc['bookAuthor']);
+        var x = Books(
+            doc['bookName'],
+            doc['bookGenre'],
+            doc['bookImage'],
+            doc['bookAuthor'],
+            doc['bookDescription'],
+            doc['bookIssued'],
+            doc.id.toString());
 
         books.insert(i, x);
       });
@@ -171,6 +186,13 @@ class _IndexState extends State<Index> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => QRViewExample()));
+                    } else if (_current == 4) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => GetUserIssuedBooks(),
+                        ),
+                      );
                     }
                   },
                   child: _current == 3
@@ -187,11 +209,15 @@ class _IndexState extends State<Index> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
-        title: Text(
-          'You are @Library IIT Jodhpur',
-          style: TextStyle(
-            color: Colors.black,
-          ),
+        title: Row(
+          children: [
+            Text(
+              'You are @Library IIT Jodhpur ',
+              style: TextStyle(
+                color: Colors.black,
+              ),
+            ),
+          ],
         ),
       ),
       body: Container(
@@ -315,14 +341,13 @@ class _IndexState extends State<Index> {
             //       MaterialPageRoute(builder: (context) => Verificatoin()));
             // }
             else if (index == 1) {
-              // Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //         builder: (context) =>
-              //             AddUser("Hereit is", "Flipkart", 20)));
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => SendMail()));
             } else if (index == 2) {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => GetUserName()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => CompleteProfileScreen()));
             }
           });
         },

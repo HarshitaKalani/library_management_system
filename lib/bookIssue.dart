@@ -1,13 +1,18 @@
 // import 'package:book_app/consttants.dart';
 // import 'package:book_app/widgets/book_rating.dart';
 // import 'package:book_app/widgets/rounded_button.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:loginapp/index.dart';
 import 'package:loginapp/readFireStore.dart';
 import 'package:loginapp/writeFireStore.dart';
+import 'package:mailer/mailer.dart';
+import 'package:mailer/smtp_server/gmail.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 import 'animation/FadeAnimation.dart';
+import 'getUserActivity.dart';
 import 'main.dart';
 import 'models/books.dart';
 import 'models/chapterCard.dart';
@@ -38,6 +43,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
   int selectedService = -1;
   int _currentIndex = 0;
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  // final User user = _auth.currentUser;
 
   @override
   Widget build(BuildContext context) {
@@ -160,7 +166,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
               //             AddUser("Hereit is", "Flipkart", 20)));
             } else if (index == 2) {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => GetUserName()));
+                  MaterialPageRoute(builder: (context) => GetUserActivity()));
             }
           });
         },
@@ -284,7 +290,7 @@ class BookInfo extends StatelessWidget {
                             padding:
                                 EdgeInsets.only(top: this.size.height * .02),
                             child: Text(
-                              "Love Story is a 2021 Indian Telugu-language musical romantic-drama film[4] written and directed by Sekhar Kammula. Produced by Amigos Creations and Sree Venkateswara Cinemas, the film stars Naga Chaitanya and Sai Pallavi while Rajeev Kanakala, Devayani, Easwari Rao and Uttej play supporting roles. The film tells the story of an inter-caste relationship between Revanth (Chaitanya) and Mounika (Pallavi) who meet in the city while pursuing their dreams.",
+                              book.bookDescription,
                               maxLines: 5,
                               style: TextStyle(
                                 fontSize: 10,
@@ -300,27 +306,64 @@ class BookInfo extends StatelessWidget {
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(30),
                             ),
-                            child: FlatButton(
-                              onPressed: () async {
-                                final Email email = Email(
-                                  body: 'Email body',
-                                  subject: 'Email subject',
-                                  recipients: ['goswamipranav11@gmail.com'],
-                                  // cc: ['cc@example.com'],
-                                  // bcc: ['bcc@example.com'],
-                                  // attachmentPaths: ['/path/to/attachment.zip'],
-                                  isHTML: false,
-                                );
-                                await FlutterEmailSender.send(email);
-                              },
-                              child: Text(
-                                "Issue",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                ),
-                              ),
-                            ),
+                            child: book.bookIssued
+                                ? Text(
+                                    "Currently \nUnavailable",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 12,
+                                    ),
+                                  )
+                                : FlatButton(
+                                    onPressed: () async {
+                                      sendMail(
+                                          FirebaseAuth
+                                              .instance.currentUser.email
+                                              .toString(),
+                                          FirebaseAuth
+                                              .instance.currentUser.displayName
+                                              .toString(),
+                                          book.bookName);
+                                      CollectionReference bookIssuedDetails =
+                                          FirebaseFirestore.instance
+                                              .collection('IssuedBooks');
+                                      bookIssuedDetails
+                                          .add({
+                                            'bookDetails':
+                                                book.bookId, // John Doe
+                                            'issuedBy': FirebaseAuth
+                                                .instance
+                                                .currentUser
+                                                .displayName, // Stokes and Sons
+                                            // 'age': age // 42
+                                            'issuedTime': DateTime.now(),
+                                            'bookName': book.bookName,
+                                          })
+                                          .then((value) => print("Book Added"))
+                                          .catchError((error) => print(
+                                              "Failed to add user: $error"));
+
+                                      FirebaseFirestore.instance
+                                          .collection('Books')
+                                          .doc(book.bookId)
+                                          .update({'bookIssued': true})
+                                          .then((value) => {
+                                                print("User Updated"),
+                                                showAlertDialog2(context),
+                                              })
+                                          .catchError((error) => print(
+                                              "Failed to update user: $error"));
+
+                                      // await FlutterEmailSender.send(email);
+                                    },
+                                    child: Text(
+                                      "Issue",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                  ),
                           )
                         ],
                       ),
@@ -356,4 +399,121 @@ class BookInfo extends StatelessWidget {
       ),
     );
   }
+
+  showAlertDialog2(BuildContext context) {
+    // set up the button
+    // Widget logOutButton = SalomonBottomBarItem(
+    //   icon: Icon(Icons.logout),
+    //   title: Text("LogOut"),
+    //   selectedColor: Colors.redAccent,
+    // );
+    Widget okButton = TextButton(
+      child: Text("Go Back"),
+      onPressed: () {
+        // Navigator.push(
+        //     context, MaterialPageRoute(builder: (context) => HomePage()));
+        Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => Index()), (route) => false);
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("Book Issued!!"),
+      content: Text("You have successfully Issued the book!!"),
+      actions: [
+        okButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+}
+
+// void sendMail(String s, String t, String u) {}
+void sendMail(String email, String personName, String bookName) async {
+  String username = 'goswamipranav11@gmail.com';
+  String password = 'Pranav@2002';
+
+  final smtpServer = gmail(username, password);
+  // Use the SmtpServer class to configure an SMTP server:
+  // final smtpServer = SmtpServer('smtp.domain.com');
+  // See the named arguments of SmtpServer for further configuration
+  // options.
+
+  // Create our message.
+  final message = Message()
+    ..from = Address(username, username.toString())
+    ..recipients.add(email)
+    // ..ccRecipients.addAll(['destCc1@example.com', 'destCc2@example.com'])
+    // ..bccRecipients.add(Address('bccAddress@example.com'))
+    ..subject = 'Book Issue @Library IITJ::  ${DateTime.now()}'
+    ..text = 'Heyy ' +
+        personName +
+        '!' +
+        '\nYou have successfully Issued ' +
+        bookName +
+        ' on ${DateTime.now()}' +
+        '\nYou will have to return the book within 7 working days else you will be penalised!!' +
+        '\nRegards.';
+  // ..html = "<h1>Test</h1>\n<p>Hey! Here's some HTML content</p>";
+
+  try {
+    final sendReport = await send(message, smtpServer);
+    print('Message sent: ' + sendReport.toString());
+  } on MailerException catch (e) {
+    print('Message not sent.');
+    for (var p in e.problems) {
+      print('Problem: ${p.code}: ${p.msg}');
+    }
+  }
+  // DONE
+
+  // Let's send another message using a slightly different syntax:
+  //
+  // Addresses without a name part can be set directly.
+  // For instance `..recipients.add('destination@example.com')`
+  // If you want to display a name part you have to create an
+  // Address object: `new Address('destination@example.com', 'Display name part')`
+  // Creating and adding an Address object without a name part
+  // `new Address('destination@example.com')` is equivalent to
+  // adding the mail address as `String`.
+
+  // final equivalentMessage = Message()
+  //   ..from = Address(username, 'Your name 😀')
+  //   ..recipients.add(Address('goswamipranav11@gmail.com'))
+  //   // ..ccRecipients
+  //   //     .addAll([Address('destCc1@example.com'), 'destCc2@example.com'])
+  //   // ..bccRecipients.add('bccAddress@example.com')
+  //   ..subject = 'Test Dart Mailer library :: 😀 :: ${DateTime.now()}'
+  //   ..text = 'This is the plain text.\nThis is line 2 of the text part.'
+  //   ..html =
+  //       '<h1>Test</h1>\n<p>Hey! Here is some HTML content</p><img src="cid:myimg@3.141"/>'
+  //   ..attachments = [
+  //     // FileAttachment(File('exploits_of_a_mom.png'))
+  //     //   ..location = Location.inline
+  //     //   ..cid = '<myimg@3.141>'
+  //   ];
+
+  final sendReport2 = await send(message, smtpServer);
+
+  // Sending multiple messages with the same connection
+  //
+  // Create a smtp client that will persist the connection
+  var connection = PersistentConnection(smtpServer);
+
+  // Send the first message
+  await connection.send(message);
+
+  // send the equivalent message
+  // await connection.send(equivalentMessage);
+
+  // close the connection
+  await connection.close();
 }
