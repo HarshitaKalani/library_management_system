@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:loginapp/adminPanel.dart';
 import 'package:loginapp/bookIssue.dart';
 import 'package:loginapp/index.dart';
 import 'package:loginapp/readFireStore.dart';
 import 'package:loginapp/temp.dart';
+import 'package:loginapp/userProfile.dart';
 import 'package:loginapp/writeFireStore.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:loginapp/bookIssue.dart';
@@ -27,9 +29,12 @@ class VariableBooks extends StatefulWidget {
 }
 
 class _VariableBooksState extends State<VariableBooks> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   int selectedService = -1;
   int _currentIndex = 0;
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  late String _searchValue;
 
   @override
   Widget build(BuildContext context) {
@@ -63,13 +68,45 @@ class _VariableBooksState extends State<VariableBooks> {
               1.2,
               Padding(
                 padding: EdgeInsets.only(top: 120.0, right: 20.0, left: 20.0),
-                child: Text(
-                  'Select Book \nto Issue!',
-                  style: TextStyle(
-                    fontSize: 40,
-                    color: Colors.grey.shade900,
-                    fontWeight: FontWeight.bold,
-                  ),
+                child: Column(
+                  children: <Widget>[
+                    Text(
+                      'Select book to issue!',
+                      style: TextStyle(
+                        fontSize: 40,
+                        color: Colors.grey.shade900,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Container(
+                      height: 46,
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade200,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Form(
+                        key: _formKey,
+                        child: TextFormField(
+                          validator: (input) {
+                            if (input != null && input.isEmpty)
+                              return "Search Something";
+                          },
+                          cursorColor: Colors.black,
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(
+                              Icons.search,
+                              color: Colors.grey.shade700,
+                            ),
+                            border: InputBorder.none,
+                            hintText: "Search Book",
+                            hintStyle: TextStyle(color: Colors.grey.shade500),
+                          ),
+                          onSaved: (input) => _searchValue = input!,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ))
@@ -111,20 +148,32 @@ class _VariableBooksState extends State<VariableBooks> {
         onTap: (index) {
           setState(() {
             _currentIndex = index;
-            if (index == 3) {
-              showAlertDialog(context);
-            } else if (index == 0) {
+            if (index == 0) {
               Navigator.push(
                   context, MaterialPageRoute(builder: (context) => Index()));
             } else if (index == 1) {
-              // Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //         builder: (context) =>
-              //             AddUser("Hereit is", "Flipkart", 20)));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => CompleteProfileScreen()));
             } else if (index == 2) {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => GetUserActivity()));
+              int flag = 0;
+              FirebaseFirestore.instance
+                  .collection('librarian')
+                  .where('email',
+                      isEqualTo: FirebaseAuth.instance.currentUser.email)
+                  .where('displayName',
+                      isEqualTo: FirebaseAuth.instance.currentUser.displayName)
+                  .get()
+                  .then((QuerySnapshot querySnapshot) {
+                flag = 1;
+                print("here");
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => UserTab()));
+              });
+            }
+            if (index == 3) {
+              showAlertDialog(context);
             }
           });
         },
@@ -138,15 +187,20 @@ class _VariableBooksState extends State<VariableBooks> {
           //     icon: Icon(Icons.favorite_border),
           //     title: Text("Likes"),
           //     selectedColor: Colors.pink),
-          SalomonBottomBarItem(
-            icon: Icon(Icons.search),
-            title: Text("Search"),
-            selectedColor: Colors.orange,
-          ),
+          // SalomonBottomBarItem(
+          //   icon: Icon(Icons.search),
+          //   title: Text("Search"),
+          //   selectedColor: Colors.orange,
+          // ),
           SalomonBottomBarItem(
             icon: Icon(Icons.person),
             title: Text("Profile"),
             selectedColor: Colors.teal,
+          ),
+          SalomonBottomBarItem(
+            icon: Icon(Icons.admin_panel_settings),
+            title: Text("Admin"),
+            selectedColor: Colors.redAccent,
           ),
           SalomonBottomBarItem(
             icon: Icon(Icons.logout),

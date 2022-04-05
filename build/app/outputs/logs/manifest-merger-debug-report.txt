@@ -1,14 +1,16 @@
 -- Merging decision tree log ---
 application
-INJECTED from C:\Users\lenovo\Documents\GitHub\library_management_system\android\app\src\main\AndroidManifest.xml:3:4-36:19
-MERGED from [:firebase_auth] C:\Users\lenovo\Documents\GitHub\library_management_system\build\firebase_auth\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-13:19
-MERGED from [:firebase_auth] C:\Users\lenovo\Documents\GitHub\library_management_system\build\firebase_auth\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-13:19
+INJECTED from C:\Users\lenovo\Documents\GitHub\library_management_system\android\app\src\main\AndroidManifest.xml:3:4-39:19
 MERGED from [:cloud_firestore] C:\Users\lenovo\Documents\GitHub\library_management_system\build\cloud_firestore\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-13:19
 MERGED from [:cloud_firestore] C:\Users\lenovo\Documents\GitHub\library_management_system\build\cloud_firestore\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-13:19
+MERGED from [:firebase_auth] C:\Users\lenovo\Documents\GitHub\library_management_system\build\firebase_auth\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-13:19
+MERGED from [:firebase_auth] C:\Users\lenovo\Documents\GitHub\library_management_system\build\firebase_auth\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-13:19
 MERGED from [:firebase_core] C:\Users\lenovo\Documents\GitHub\library_management_system\build\firebase_core\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-13:19
 MERGED from [:firebase_core] C:\Users\lenovo\Documents\GitHub\library_management_system\build\firebase_core\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-13:19
 MERGED from [:flutter_email_sender] C:\Users\lenovo\Documents\GitHub\library_management_system\build\flutter_email_sender\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-17:19
 MERGED from [:flutter_email_sender] C:\Users\lenovo\Documents\GitHub\library_management_system\build\flutter_email_sender\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-17:19
+MERGED from [:image_picker] C:\Users\lenovo\Documents\GitHub\library_management_system\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:10:5-20:19
+MERGED from [:image_picker] C:\Users\lenovo\Documents\GitHub\library_management_system\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:10:5-20:19
 MERGED from [:flutter_local_notifications] C:\Users\lenovo\Documents\GitHub\library_management_system\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:11:5-21:19
 MERGED from [:flutter_local_notifications] C:\Users\lenovo\Documents\GitHub\library_management_system\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:11:5-21:19
 MERGED from [androidx.window:window:1.0.0-beta04] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\cea45e25bbe77c9713c39e234ccfd7bd\jetified-window-1.0.0-beta04\AndroidManifest.xml:24:5-31:19
@@ -70,24 +72,34 @@ MERGED from [com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\lenovo\.grad
 	android:name
 		INJECTED from C:\Users\lenovo\Documents\GitHub\library_management_system\android\app\src\main\AndroidManifest.xml
 manifest
-ADDED from C:\Users\lenovo\Documents\GitHub\library_management_system\android\app\src\main\AndroidManifest.xml:1:1-37:12
-INJECTED from C:\Users\lenovo\Documents\GitHub\library_management_system\android\app\src\main\AndroidManifest.xml:1:1-37:12
-INJECTED from C:\Users\lenovo\Documents\GitHub\library_management_system\android\app\src\main\AndroidManifest.xml:1:1-37:12
-INJECTED from C:\Users\lenovo\Documents\GitHub\library_management_system\android\app\src\main\AndroidManifest.xml:1:1-37:12
-MERGED from C:\Users\lenovo\Documents\GitHub\library_management_system\android\app\src\main\AndroidManifest.xml:1:1-37:12
-MERGED from [:firebase_auth] C:\Users\lenovo\Documents\GitHub\library_management_system\build\firebase_auth\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-15:12
+ADDED from C:\Users\lenovo\Documents\GitHub\library_management_system\android\app\src\main\AndroidManifest.xml:1:1-40:12
+INJECTED from C:\Users\lenovo\Documents\GitHub\library_management_system\android\app\src\main\AndroidManifest.xml:1:1-40:12
+INJECTED from C:\Users\lenovo\Documents\GitHub\library_management_system\android\app\src\main\AndroidManifest.xml:1:1-40:12
+INJECTED from C:\Users\lenovo\Documents\GitHub\library_management_system\android\app\src\main\AndroidManifest.xml:1:1-40:12
+MERGED from C:\Users\lenovo\Documents\GitHub\library_management_system\android\app\src\main\AndroidManifest.xml:1:1-40:12
 MERGED from [:cloud_firestore] C:\Users\lenovo\Documents\GitHub\library_management_system\build\cloud_firestore\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-15:12
+MERGED from [:firebase_auth] C:\Users\lenovo\Documents\GitHub\library_management_system\build\firebase_auth\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-15:12
 MERGED from [:firebase_core] C:\Users\lenovo\Documents\GitHub\library_management_system\build\firebase_core\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-15:12
 MERGED from [:flutter_email_sender] C:\Users\lenovo\Documents\GitHub\library_management_system\build\flutter_email_sender\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-19:12
-MERGED from [:connectivity] C:\Users\lenovo\Documents\GitHub\library_management_system\build\connectivity\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-9:12
+MERGED from [:image_picker] C:\Users\lenovo\Documents\GitHub\library_management_system\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-22:12
+MERGED from [:file_picker] C:\Users\lenovo\Documents\GitHub\library_management_system\build\file_picker\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-17:12
+MERGED from [:flutter_plugin_android_lifecycle] C:\Users\lenovo\Documents\GitHub\library_management_system\build\flutter_plugin_android_lifecycle\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [:flutter_local_notifications] C:\Users\lenovo\Documents\GitHub\library_management_system\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-23:12
+MERGED from [:path_provider_android] C:\Users\lenovo\Documents\GitHub\library_management_system\build\path_provider_android\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [:qr_code_scanner] C:\Users\lenovo\Documents\GitHub\library_management_system\build\qr_code_scanner\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
+MERGED from [:connectivity] C:\Users\lenovo\Documents\GitHub\library_management_system\build\connectivity\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-9:12
+MERGED from [:integration_test] C:\Users\lenovo\Documents\GitHub\library_management_system\build\integration_test\intermediates\library_manifest\debug\AndroidManifest.xml:7:1-12:12
 MERGED from [:google_sign_in] C:\Users\lenovo\Documents\GitHub\library_management_system\build\google_sign_in\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-9:12
+MERGED from [:whatsapp_share] C:\Users\lenovo\Documents\GitHub\library_management_system\build\whatsapp_share\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.multidex:multidex:2.0.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\02d04e6dfdbeb319e115f5728d226784\multidex-2.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.window:window-java:1.0.0-beta04] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\a3b86b42fafb2019c6d99a912992ce19\jetified-window-java-1.0.0-beta04\AndroidManifest.xml:17:1-23:12
 MERGED from [androidx.window:window:1.0.0-beta04] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\cea45e25bbe77c9713c39e234ccfd7bd\jetified-window-1.0.0-beta04\AndroidManifest.xml:17:1-33:12
 MERGED from [com.google.firebase:firebase-core:17.5.1] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\17932a17fc27d2986620dc36ddb1bceb\jetified-firebase-core-17.5.1\AndroidManifest.xml:2:1-9:12
 MERGED from [androidx.appcompat:appcompat:1.4.1] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\0d9eb21473c7cbde5cc592f16d1e4ae9\appcompat-1.4.1\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.exifinterface:exifinterface:1.3.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\b7a4bedb3ae5643a7a7af8bc9a9af596\exifinterface-1.3.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.test:rules:1.2.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\7708f4d8a126e55f7cec55a4e4e27fa3\rules-1.2.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.test.espresso:espresso-core:3.2.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\bd4c1452cd3ea89e39d4e38db537e911\espresso-core-3.2.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.test:runner:1.2.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\475a8ff4664daad0e0e9c8c3027bfa75\runner-1.2.0\AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.firebase:firebase-firestore:21.7.1] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\290e4371c979e998855e91553d58ae27\jetified-firebase-firestore-21.7.1\AndroidManifest.xml:2:1-26:12
 MERGED from [com.google.firebase:firebase-auth:19.4.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\230c309c3159a62042b1da2e0804cec7\jetified-firebase-auth-19.4.0\AndroidManifest.xml:17:1-42:12
 MERGED from [com.google.android.gms:play-services-auth:16.0.1] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\2be99809306dc4442bdeea9c3b941b22\jetified-play-services-auth-16.0.1\AndroidManifest.xml:17:1-39:12
@@ -132,6 +144,7 @@ MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\lenovo\.gradle
 MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.1] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\03faaaf442c9d720483fba49eda29474\jetified-lifecycle-viewmodel-savedstate-2.3.1\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.savedstate:savedstate:1.1.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\b7a7d62cdfec9b5c5710973fabb741e8\jetified-savedstate-1.1.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.3.1] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\13ba3a2d390e92c714ad608cae0b18ad\lifecycle-viewmodel-2.3.1\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.test:monitor:1.2.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\b3d6db2fb5b0bd96a12c2f8ae706246e\monitor-1.2.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\5408995d19686f9d35f8a810d9d7986f\localbroadcastmanager-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.firebase:firebase-components:16.0.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\b6bc90956b2ce625a414f0400fa5d235\jetified-firebase-components-16.0.0\AndroidManifest.xml:15:1-23:12
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\0bd53d61454f05a360ed50c12e1c0f57\versionedparcelable-1.1.1\AndroidManifest.xml:17:1-27:12
@@ -145,6 +158,7 @@ MERGED from [androidx.print:print:1.0.0] C:\Users\lenovo\.gradle\caches\transfor
 MERGED from [io.grpc:grpc-android:1.28.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\bb2a5c4687fea8e9ade846fd5d0e6df7\jetified-grpc-android-1.28.0\AndroidManifest.xml:2:1-13:12
 MERGED from [com.jakewharton.threetenabp:threetenabp:1.2.3] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\f0be151bd9c905293ae08084c4dfc4b8\jetified-threetenabp-1.2.3\AndroidManifest.xml:2:1-9:12
 MERGED from [com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\a305deeb5217ec76f10d4fffc30725aa\jetified-zxing-android-embedded-4.3.0\AndroidManifest.xml:17:1-56:12
+MERGED from [androidx.test.espresso:espresso-idling-resource:3.2.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\2b7ecb0a104b680d99c756d16e8f21e4\espresso-idling-resource-3.2.0\AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.firebase:protolite-well-known-types:17.1.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\70ed1b00197d651709a8939f2f3af9cc\jetified-protolite-well-known-types-17.1.0\AndroidManifest.xml:2:1-11:12
 MERGED from [androidx.annotation:annotation-experimental:1.1.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\7e5cb6c6f9437da119823e44c35d9b10\jetified-annotation-experimental-1.1.0\AndroidManifest.xml:17:1-24:12
 INJECTED from C:\Users\lenovo\Documents\GitHub\library_management_system\android\app\src\debug\AndroidManifest.xml:1:1-7:12
@@ -156,11 +170,11 @@ INJECTED from C:\Users\lenovo\Documents\GitHub\library_management_system\android
 		INJECTED from C:\Users\lenovo\Documents\GitHub\library_management_system\android\app\src\debug\AndroidManifest.xml
 	android:versionName
 		INJECTED from C:\Users\lenovo\Documents\GitHub\library_management_system\android\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\lenovo\Documents\GitHub\library_management_system\android\app\src\main\AndroidManifest.xml:1:1-37:12
+		ADDED from C:\Users\lenovo\Documents\GitHub\library_management_system\android\app\src\main\AndroidManifest.xml:1:1-40:12
 		INJECTED from C:\Users\lenovo\Documents\GitHub\library_management_system\android\app\src\debug\AndroidManifest.xml
 	android:versionCode
 		INJECTED from C:\Users\lenovo\Documents\GitHub\library_management_system\android\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\lenovo\Documents\GitHub\library_management_system\android\app\src\main\AndroidManifest.xml:1:1-37:12
+		ADDED from C:\Users\lenovo\Documents\GitHub\library_management_system\android\app\src\main\AndroidManifest.xml:1:1-40:12
 		INJECTED from C:\Users\lenovo\Documents\GitHub\library_management_system\android\app\src\debug\AndroidManifest.xml
 	xmlns:android
 		ADDED from C:\Users\lenovo\Documents\GitHub\library_management_system\android\app\src\main\AndroidManifest.xml:1:11-69
@@ -168,22 +182,34 @@ uses-sdk
 INJECTED from C:\Users\lenovo\Documents\GitHub\library_management_system\android\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\lenovo\Documents\GitHub\library_management_system\android\app\src\main\AndroidManifest.xml
 INJECTED from C:\Users\lenovo\Documents\GitHub\library_management_system\android\app\src\main\AndroidManifest.xml
-MERGED from [:firebase_auth] C:\Users\lenovo\Documents\GitHub\library_management_system\build\firebase_auth\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
-MERGED from [:firebase_auth] C:\Users\lenovo\Documents\GitHub\library_management_system\build\firebase_auth\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:cloud_firestore] C:\Users\lenovo\Documents\GitHub\library_management_system\build\cloud_firestore\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:cloud_firestore] C:\Users\lenovo\Documents\GitHub\library_management_system\build\cloud_firestore\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:firebase_auth] C:\Users\lenovo\Documents\GitHub\library_management_system\build\firebase_auth\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:firebase_auth] C:\Users\lenovo\Documents\GitHub\library_management_system\build\firebase_auth\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:firebase_core] C:\Users\lenovo\Documents\GitHub\library_management_system\build\firebase_core\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:firebase_core] C:\Users\lenovo\Documents\GitHub\library_management_system\build\firebase_core\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:flutter_email_sender] C:\Users\lenovo\Documents\GitHub\library_management_system\build\flutter_email_sender\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:flutter_email_sender] C:\Users\lenovo\Documents\GitHub\library_management_system\build\flutter_email_sender\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
-MERGED from [:connectivity] C:\Users\lenovo\Documents\GitHub\library_management_system\build\connectivity\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
-MERGED from [:connectivity] C:\Users\lenovo\Documents\GitHub\library_management_system\build\connectivity\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:image_picker] C:\Users\lenovo\Documents\GitHub\library_management_system\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:image_picker] C:\Users\lenovo\Documents\GitHub\library_management_system\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:file_picker] C:\Users\lenovo\Documents\GitHub\library_management_system\build\file_picker\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:file_picker] C:\Users\lenovo\Documents\GitHub\library_management_system\build\file_picker\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:flutter_plugin_android_lifecycle] C:\Users\lenovo\Documents\GitHub\library_management_system\build\flutter_plugin_android_lifecycle\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:flutter_plugin_android_lifecycle] C:\Users\lenovo\Documents\GitHub\library_management_system\build\flutter_plugin_android_lifecycle\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:flutter_local_notifications] C:\Users\lenovo\Documents\GitHub\library_management_system\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:flutter_local_notifications] C:\Users\lenovo\Documents\GitHub\library_management_system\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:path_provider_android] C:\Users\lenovo\Documents\GitHub\library_management_system\build\path_provider_android\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:path_provider_android] C:\Users\lenovo\Documents\GitHub\library_management_system\build\path_provider_android\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:qr_code_scanner] C:\Users\lenovo\Documents\GitHub\library_management_system\build\qr_code_scanner\intermediates\library_manifest\debug\AndroidManifest.xml:6:5-9:67
 MERGED from [:qr_code_scanner] C:\Users\lenovo\Documents\GitHub\library_management_system\build\qr_code_scanner\intermediates\library_manifest\debug\AndroidManifest.xml:6:5-9:67
+MERGED from [:connectivity] C:\Users\lenovo\Documents\GitHub\library_management_system\build\connectivity\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:connectivity] C:\Users\lenovo\Documents\GitHub\library_management_system\build\connectivity\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:integration_test] C:\Users\lenovo\Documents\GitHub\library_management_system\build\integration_test\intermediates\library_manifest\debug\AndroidManifest.xml:10:5-44
+MERGED from [:integration_test] C:\Users\lenovo\Documents\GitHub\library_management_system\build\integration_test\intermediates\library_manifest\debug\AndroidManifest.xml:10:5-44
 MERGED from [:google_sign_in] C:\Users\lenovo\Documents\GitHub\library_management_system\build\google_sign_in\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:google_sign_in] C:\Users\lenovo\Documents\GitHub\library_management_system\build\google_sign_in\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:whatsapp_share] C:\Users\lenovo\Documents\GitHub\library_management_system\build\whatsapp_share\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:whatsapp_share] C:\Users\lenovo\Documents\GitHub\library_management_system\build\whatsapp_share\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [androidx.multidex:multidex:2.0.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\02d04e6dfdbeb319e115f5728d226784\multidex-2.0.0\AndroidManifest.xml:20:5-43
 MERGED from [androidx.multidex:multidex:2.0.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\02d04e6dfdbeb319e115f5728d226784\multidex-2.0.0\AndroidManifest.xml:20:5-43
 MERGED from [androidx.window:window-java:1.0.0-beta04] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\a3b86b42fafb2019c6d99a912992ce19\jetified-window-java-1.0.0-beta04\AndroidManifest.xml:19:5-21:41
@@ -194,6 +220,14 @@ MERGED from [com.google.firebase:firebase-core:17.5.1] C:\Users\lenovo\.gradle\c
 MERGED from [com.google.firebase:firebase-core:17.5.1] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\17932a17fc27d2986620dc36ddb1bceb\jetified-firebase-core-17.5.1\AndroidManifest.xml:5:5-44
 MERGED from [androidx.appcompat:appcompat:1.4.1] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\0d9eb21473c7cbde5cc592f16d1e4ae9\appcompat-1.4.1\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.appcompat:appcompat:1.4.1] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\0d9eb21473c7cbde5cc592f16d1e4ae9\appcompat-1.4.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.exifinterface:exifinterface:1.3.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\b7a4bedb3ae5643a7a7af8bc9a9af596\exifinterface-1.3.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.exifinterface:exifinterface:1.3.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\b7a4bedb3ae5643a7a7af8bc9a9af596\exifinterface-1.3.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.test:rules:1.2.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\7708f4d8a126e55f7cec55a4e4e27fa3\rules-1.2.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.test:rules:1.2.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\7708f4d8a126e55f7cec55a4e4e27fa3\rules-1.2.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.test.espresso:espresso-core:3.2.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\bd4c1452cd3ea89e39d4e38db537e911\espresso-core-3.2.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.test.espresso:espresso-core:3.2.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\bd4c1452cd3ea89e39d4e38db537e911\espresso-core-3.2.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.test:runner:1.2.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\475a8ff4664daad0e0e9c8c3027bfa75\runner-1.2.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.test:runner:1.2.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\475a8ff4664daad0e0e9c8c3027bfa75\runner-1.2.0\AndroidManifest.xml:20:5-22:41
 MERGED from [com.google.firebase:firebase-firestore:21.7.1] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\290e4371c979e998855e91553d58ae27\jetified-firebase-firestore-21.7.1\AndroidManifest.xml:7:5-9:41
 MERGED from [com.google.firebase:firebase-firestore:21.7.1] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\290e4371c979e998855e91553d58ae27\jetified-firebase-firestore-21.7.1\AndroidManifest.xml:7:5-9:41
 MERGED from [com.google.firebase:firebase-auth:19.4.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\230c309c3159a62042b1da2e0804cec7\jetified-firebase-auth-19.4.0\AndroidManifest.xml:21:5-44
@@ -282,6 +316,8 @@ MERGED from [androidx.savedstate:savedstate:1.1.0] C:\Users\lenovo\.gradle\cache
 MERGED from [androidx.savedstate:savedstate:1.1.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\b7a7d62cdfec9b5c5710973fabb741e8\jetified-savedstate-1.1.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.3.1] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\13ba3a2d390e92c714ad608cae0b18ad\lifecycle-viewmodel-2.3.1\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.3.1] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\13ba3a2d390e92c714ad608cae0b18ad\lifecycle-viewmodel-2.3.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.test:monitor:1.2.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\b3d6db2fb5b0bd96a12c2f8ae706246e\monitor-1.2.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.test:monitor:1.2.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\b3d6db2fb5b0bd96a12c2f8ae706246e\monitor-1.2.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\5408995d19686f9d35f8a810d9d7986f\localbroadcastmanager-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\5408995d19686f9d35f8a810d9d7986f\localbroadcastmanager-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [com.google.firebase:firebase-components:16.0.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\b6bc90956b2ce625a414f0400fa5d235\jetified-firebase-components-16.0.0\AndroidManifest.xml:19:5-21:41
@@ -308,6 +344,8 @@ MERGED from [com.jakewharton.threetenabp:threetenabp:1.2.3] C:\Users\lenovo\.gra
 MERGED from [com.jakewharton.threetenabp:threetenabp:1.2.3] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\f0be151bd9c905293ae08084c4dfc4b8\jetified-threetenabp-1.2.3\AndroidManifest.xml:5:5-44
 MERGED from [com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\a305deeb5217ec76f10d4fffc30725aa\jetified-zxing-android-embedded-4.3.0\AndroidManifest.xml:20:5-44
 MERGED from [com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\a305deeb5217ec76f10d4fffc30725aa\jetified-zxing-android-embedded-4.3.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.test.espresso:espresso-idling-resource:3.2.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\2b7ecb0a104b680d99c756d16e8f21e4\espresso-idling-resource-3.2.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.test.espresso:espresso-idling-resource:3.2.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\2b7ecb0a104b680d99c756d16e8f21e4\espresso-idling-resource-3.2.0\AndroidManifest.xml:20:5-22:41
 MERGED from [com.google.firebase:protolite-well-known-types:17.1.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\70ed1b00197d651709a8939f2f3af9cc\jetified-protolite-well-known-types-17.1.0\AndroidManifest.xml:7:5-9:41
 MERGED from [com.google.firebase:protolite-well-known-types:17.1.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\70ed1b00197d651709a8939f2f3af9cc\jetified-protolite-well-known-types-17.1.0\AndroidManifest.xml:7:5-9:41
 MERGED from [androidx.annotation:annotation-experimental:1.1.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\7e5cb6c6f9437da119823e44c35d9b10\jetified-annotation-experimental-1.1.0\AndroidManifest.xml:20:5-22:41
@@ -341,9 +379,9 @@ MERGED from [com.google.android.gms:play-services-measurement-sdk-api:17.6.0] C:
 	android:name
 		ADDED from C:\Users\lenovo\Documents\GitHub\library_management_system\android\app\src\debug\AndroidManifest.xml:6:22-64
 service#com.google.firebase.components.ComponentDiscoveryService
-ADDED from [:firebase_auth] C:\Users\lenovo\Documents\GitHub\library_management_system\build\firebase_auth\intermediates\library_manifest\debug\AndroidManifest.xml:8:9-12:19
-MERGED from [:cloud_firestore] C:\Users\lenovo\Documents\GitHub\library_management_system\build\cloud_firestore\intermediates\library_manifest\debug\AndroidManifest.xml:8:9-12:19
-MERGED from [:cloud_firestore] C:\Users\lenovo\Documents\GitHub\library_management_system\build\cloud_firestore\intermediates\library_manifest\debug\AndroidManifest.xml:8:9-12:19
+ADDED from [:cloud_firestore] C:\Users\lenovo\Documents\GitHub\library_management_system\build\cloud_firestore\intermediates\library_manifest\debug\AndroidManifest.xml:8:9-12:19
+MERGED from [:firebase_auth] C:\Users\lenovo\Documents\GitHub\library_management_system\build\firebase_auth\intermediates\library_manifest\debug\AndroidManifest.xml:8:9-12:19
+MERGED from [:firebase_auth] C:\Users\lenovo\Documents\GitHub\library_management_system\build\firebase_auth\intermediates\library_manifest\debug\AndroidManifest.xml:8:9-12:19
 MERGED from [:firebase_core] C:\Users\lenovo\Documents\GitHub\library_management_system\build\firebase_core\intermediates\library_manifest\debug\AndroidManifest.xml:8:9-12:19
 MERGED from [:firebase_core] C:\Users\lenovo\Documents\GitHub\library_management_system\build\firebase_core\intermediates\library_manifest\debug\AndroidManifest.xml:8:9-12:19
 MERGED from [com.google.firebase:firebase-firestore:21.7.1] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\290e4371c979e998855e91553d58ae27\jetified-firebase-firestore-21.7.1\AndroidManifest.xml:17:9-23:19
@@ -363,19 +401,19 @@ MERGED from [com.google.firebase:firebase-common:19.3.1] C:\Users\lenovo\.gradle
 	android:directBootAware
 		ADDED from [com.google.firebase:firebase-common:19.3.1] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\ff6a5116b20e9b5259aeb83ac7ea3fdd\jetified-firebase-common-19.3.1\AndroidManifest.xml:35:13-43
 	android:name
-		ADDED from [:firebase_auth] C:\Users\lenovo\Documents\GitHub\library_management_system\build\firebase_auth\intermediates\library_manifest\debug\AndroidManifest.xml:8:18-89
-meta-data#com.google.firebase.components:io.flutter.plugins.firebase.auth.FlutterFirebaseAuthRegistrar
-ADDED from [:firebase_auth] C:\Users\lenovo\Documents\GitHub\library_management_system\build\firebase_auth\intermediates\library_manifest\debug\AndroidManifest.xml:9:13-11:85
-	android:value
-		ADDED from [:firebase_auth] C:\Users\lenovo\Documents\GitHub\library_management_system\build\firebase_auth\intermediates\library_manifest\debug\AndroidManifest.xml:11:17-82
-	android:name
-		ADDED from [:firebase_auth] C:\Users\lenovo\Documents\GitHub\library_management_system\build\firebase_auth\intermediates\library_manifest\debug\AndroidManifest.xml:10:17-124
+		ADDED from [:cloud_firestore] C:\Users\lenovo\Documents\GitHub\library_management_system\build\cloud_firestore\intermediates\library_manifest\debug\AndroidManifest.xml:8:18-89
 meta-data#com.google.firebase.components:io.flutter.plugins.firebase.firestore.FlutterFirebaseFirestoreRegistrar
 ADDED from [:cloud_firestore] C:\Users\lenovo\Documents\GitHub\library_management_system\build\cloud_firestore\intermediates\library_manifest\debug\AndroidManifest.xml:9:13-11:85
 	android:value
 		ADDED from [:cloud_firestore] C:\Users\lenovo\Documents\GitHub\library_management_system\build\cloud_firestore\intermediates\library_manifest\debug\AndroidManifest.xml:11:17-82
 	android:name
 		ADDED from [:cloud_firestore] C:\Users\lenovo\Documents\GitHub\library_management_system\build\cloud_firestore\intermediates\library_manifest\debug\AndroidManifest.xml:10:17-134
+meta-data#com.google.firebase.components:io.flutter.plugins.firebase.auth.FlutterFirebaseAuthRegistrar
+ADDED from [:firebase_auth] C:\Users\lenovo\Documents\GitHub\library_management_system\build\firebase_auth\intermediates\library_manifest\debug\AndroidManifest.xml:9:13-11:85
+	android:value
+		ADDED from [:firebase_auth] C:\Users\lenovo\Documents\GitHub\library_management_system\build\firebase_auth\intermediates\library_manifest\debug\AndroidManifest.xml:11:17-82
+	android:name
+		ADDED from [:firebase_auth] C:\Users\lenovo\Documents\GitHub\library_management_system\build\firebase_auth\intermediates\library_manifest\debug\AndroidManifest.xml:10:17-124
 meta-data#com.google.firebase.components:io.flutter.plugins.firebase.core.FlutterFirebaseCoreRegistrar
 ADDED from [:firebase_core] C:\Users\lenovo\Documents\GitHub\library_management_system\build\firebase_core\intermediates\library_manifest\debug\AndroidManifest.xml:9:13-11:85
 	android:value
@@ -398,24 +436,38 @@ ADDED from [:flutter_email_sender] C:\Users\lenovo\Documents\GitHub\library_mana
 		ADDED from [:flutter_email_sender] C:\Users\lenovo\Documents\GitHub\library_management_system\build\flutter_email_sender\intermediates\library_manifest\debug\AndroidManifest.xml:15:17-58
 	android:name
 		ADDED from [:flutter_email_sender] C:\Users\lenovo\Documents\GitHub\library_management_system\build\flutter_email_sender\intermediates\library_manifest\debug\AndroidManifest.xml:14:17-67
-uses-permission#android.permission.ACCESS_NETWORK_STATE
-ADDED from [:connectivity] C:\Users\lenovo\Documents\GitHub\library_management_system\build\connectivity\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-79
-MERGED from [com.google.firebase:firebase-firestore:21.7.1] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\290e4371c979e998855e91553d58ae27\jetified-firebase-firestore-21.7.1\AndroidManifest.xml:13:5-79
-MERGED from [com.google.firebase:firebase-firestore:21.7.1] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\290e4371c979e998855e91553d58ae27\jetified-firebase-firestore-21.7.1\AndroidManifest.xml:13:5-79
-MERGED from [com.google.android.gms:play-services-measurement-api:17.6.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\503eb2426ffe488e2751b706be8229f2\jetified-play-services-measurement-api-17.6.0\AndroidManifest.xml:23:5-79
-MERGED from [com.google.android.gms:play-services-measurement-api:17.6.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\503eb2426ffe488e2751b706be8229f2\jetified-play-services-measurement-api-17.6.0\AndroidManifest.xml:23:5-79
-MERGED from [com.google.firebase:firebase-installations:16.3.2] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\01d1163e616a63a95380877901dc1f8b\jetified-firebase-installations-16.3.2\AndroidManifest.xml:10:5-79
-MERGED from [com.google.firebase:firebase-installations:16.3.2] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\01d1163e616a63a95380877901dc1f8b\jetified-firebase-installations-16.3.2\AndroidManifest.xml:10:5-79
-MERGED from [com.google.android.gms:play-services-measurement:17.6.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\91127e979895bac2b18452862cd0fddf\jetified-play-services-measurement-17.6.0\AndroidManifest.xml:24:5-79
-MERGED from [com.google.android.gms:play-services-measurement:17.6.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\91127e979895bac2b18452862cd0fddf\jetified-play-services-measurement-17.6.0\AndroidManifest.xml:24:5-79
-MERGED from [com.google.android.gms:play-services-measurement-impl:17.6.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\5e2029ee3bcc9b29583c31cd27a0dd08\jetified-play-services-measurement-impl-17.6.0\AndroidManifest.xml:24:5-79
-MERGED from [com.google.android.gms:play-services-measurement-impl:17.6.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\5e2029ee3bcc9b29583c31cd27a0dd08\jetified-play-services-measurement-impl-17.6.0\AndroidManifest.xml:24:5-79
-MERGED from [com.google.android.gms:play-services-measurement-sdk-api:17.6.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\861b4dd619cd634bdb4c3a1ee9106659\jetified-play-services-measurement-sdk-api-17.6.0\AndroidManifest.xml:24:5-79
-MERGED from [com.google.android.gms:play-services-measurement-sdk-api:17.6.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\861b4dd619cd634bdb4c3a1ee9106659\jetified-play-services-measurement-sdk-api-17.6.0\AndroidManifest.xml:24:5-79
-MERGED from [io.grpc:grpc-android:1.28.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\bb2a5c4687fea8e9ade846fd5d0e6df7\jetified-grpc-android-1.28.0\AndroidManifest.xml:11:5-79
-MERGED from [io.grpc:grpc-android:1.28.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\bb2a5c4687fea8e9ade846fd5d0e6df7\jetified-grpc-android-1.28.0\AndroidManifest.xml:11:5-79
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from [:image_picker] C:\Users\lenovo\Documents\GitHub\library_management_system\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-80
+MERGED from [:file_picker] C:\Users\lenovo\Documents\GitHub\library_management_system\build\file_picker\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-80
+MERGED from [:file_picker] C:\Users\lenovo\Documents\GitHub\library_management_system\build\file_picker\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-80
 	android:name
-		ADDED from [:connectivity] C:\Users\lenovo\Documents\GitHub\library_management_system\build\connectivity\intermediates\library_manifest\debug\AndroidManifest.xml:7:22-76
+		ADDED from [:image_picker] C:\Users\lenovo\Documents\GitHub\library_management_system\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:7:22-77
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from [:image_picker] C:\Users\lenovo\Documents\GitHub\library_management_system\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:8:5-81
+	android:name
+		ADDED from [:image_picker] C:\Users\lenovo\Documents\GitHub\library_management_system\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:8:22-78
+provider#io.flutter.plugins.imagepicker.ImagePickerFileProvider
+ADDED from [:image_picker] C:\Users\lenovo\Documents\GitHub\library_management_system\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:11:9-19:20
+	android:grantUriPermissions
+		ADDED from [:image_picker] C:\Users\lenovo\Documents\GitHub\library_management_system\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:15:13-47
+	android:authorities
+		ADDED from [:image_picker] C:\Users\lenovo\Documents\GitHub\library_management_system\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:13:13-74
+	android:exported
+		ADDED from [:image_picker] C:\Users\lenovo\Documents\GitHub\library_management_system\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:14:13-37
+	android:name
+		ADDED from [:image_picker] C:\Users\lenovo\Documents\GitHub\library_management_system\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:12:13-82
+queries
+ADDED from [:file_picker] C:\Users\lenovo\Documents\GitHub\library_management_system\build\file_picker\intermediates\library_manifest\debug\AndroidManifest.xml:9:5-15:15
+intent#action:name:android.intent.action.GET_CONTENT+data:mimeType:*/*
+ADDED from [:file_picker] C:\Users\lenovo\Documents\GitHub\library_management_system\build\file_picker\intermediates\library_manifest\debug\AndroidManifest.xml:10:9-14:18
+action#android.intent.action.GET_CONTENT
+ADDED from [:file_picker] C:\Users\lenovo\Documents\GitHub\library_management_system\build\file_picker\intermediates\library_manifest\debug\AndroidManifest.xml:11:13-72
+	android:name
+		ADDED from [:file_picker] C:\Users\lenovo\Documents\GitHub\library_management_system\build\file_picker\intermediates\library_manifest\debug\AndroidManifest.xml:11:21-69
+data
+ADDED from [:file_picker] C:\Users\lenovo\Documents\GitHub\library_management_system\build\file_picker\intermediates\library_manifest\debug\AndroidManifest.xml:13:13-44
+	android:mimeType
+		ADDED from [:file_picker] C:\Users\lenovo\Documents\GitHub\library_management_system\build\file_picker\intermediates\library_manifest\debug\AndroidManifest.xml:13:19-41
 uses-permission#android.permission.RECEIVE_BOOT_COMPLETED
 ADDED from [:flutter_local_notifications] C:\Users\lenovo\Documents\GitHub\library_management_system\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-81
 	android:name
@@ -454,6 +506,24 @@ action#com.htc.intent.action.QUICKBOOT_POWERON
 ADDED from [:flutter_local_notifications] C:\Users\lenovo\Documents\GitHub\library_management_system\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:18:17-82
 	android:name
 		ADDED from [:flutter_local_notifications] C:\Users\lenovo\Documents\GitHub\library_management_system\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:18:25-79
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from [:connectivity] C:\Users\lenovo\Documents\GitHub\library_management_system\build\connectivity\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-79
+MERGED from [com.google.firebase:firebase-firestore:21.7.1] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\290e4371c979e998855e91553d58ae27\jetified-firebase-firestore-21.7.1\AndroidManifest.xml:13:5-79
+MERGED from [com.google.firebase:firebase-firestore:21.7.1] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\290e4371c979e998855e91553d58ae27\jetified-firebase-firestore-21.7.1\AndroidManifest.xml:13:5-79
+MERGED from [com.google.android.gms:play-services-measurement-api:17.6.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\503eb2426ffe488e2751b706be8229f2\jetified-play-services-measurement-api-17.6.0\AndroidManifest.xml:23:5-79
+MERGED from [com.google.android.gms:play-services-measurement-api:17.6.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\503eb2426ffe488e2751b706be8229f2\jetified-play-services-measurement-api-17.6.0\AndroidManifest.xml:23:5-79
+MERGED from [com.google.firebase:firebase-installations:16.3.2] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\01d1163e616a63a95380877901dc1f8b\jetified-firebase-installations-16.3.2\AndroidManifest.xml:10:5-79
+MERGED from [com.google.firebase:firebase-installations:16.3.2] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\01d1163e616a63a95380877901dc1f8b\jetified-firebase-installations-16.3.2\AndroidManifest.xml:10:5-79
+MERGED from [com.google.android.gms:play-services-measurement:17.6.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\91127e979895bac2b18452862cd0fddf\jetified-play-services-measurement-17.6.0\AndroidManifest.xml:24:5-79
+MERGED from [com.google.android.gms:play-services-measurement:17.6.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\91127e979895bac2b18452862cd0fddf\jetified-play-services-measurement-17.6.0\AndroidManifest.xml:24:5-79
+MERGED from [com.google.android.gms:play-services-measurement-impl:17.6.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\5e2029ee3bcc9b29583c31cd27a0dd08\jetified-play-services-measurement-impl-17.6.0\AndroidManifest.xml:24:5-79
+MERGED from [com.google.android.gms:play-services-measurement-impl:17.6.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\5e2029ee3bcc9b29583c31cd27a0dd08\jetified-play-services-measurement-impl-17.6.0\AndroidManifest.xml:24:5-79
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:17.6.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\861b4dd619cd634bdb4c3a1ee9106659\jetified-play-services-measurement-sdk-api-17.6.0\AndroidManifest.xml:24:5-79
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:17.6.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\861b4dd619cd634bdb4c3a1ee9106659\jetified-play-services-measurement-sdk-api-17.6.0\AndroidManifest.xml:24:5-79
+MERGED from [io.grpc:grpc-android:1.28.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\bb2a5c4687fea8e9ade846fd5d0e6df7\jetified-grpc-android-1.28.0\AndroidManifest.xml:11:5-79
+MERGED from [io.grpc:grpc-android:1.28.0] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\bb2a5c4687fea8e9ade846fd5d0e6df7\jetified-grpc-android-1.28.0\AndroidManifest.xml:11:5-79
+	android:name
+		ADDED from [:connectivity] C:\Users\lenovo\Documents\GitHub\library_management_system\build\connectivity\intermediates\library_manifest\debug\AndroidManifest.xml:7:22-76
 uses-library#androidx.window.extensions
 ADDED from [androidx.window:window:1.0.0-beta04] C:\Users\lenovo\.gradle\caches\transforms-2\files-2.1\cea45e25bbe77c9713c39e234ccfd7bd\jetified-window-1.0.0-beta04\AndroidManifest.xml:25:9-27:40
 	android:required

@@ -13,10 +13,16 @@ import 'package:flutter_svg/flutter_svg.dart';
 // import '../../../constants.dart';
 // import 'package:shop_app/size_config.dart';
 import 'package:flutter/material.dart';
+import 'package:loginapp/adminPanel.dart';
 import 'package:loginapp/getUserIssuedBooks.dart';
 import 'package:loginapp/index.dart';
 import 'package:loginapp/main.dart';
 import 'package:loginapp/readFireStore.dart';
+import 'package:loginapp/reportQuery.dart';
+import 'package:loginapp/temp.dart';
+import 'package:loginapp/updateEmail.dart';
+import 'package:loginapp/updatePassword.dart';
+import 'package:loginapp/updateProfileImage.dart';
 import 'package:loginapp/updateUsername.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
@@ -114,12 +120,19 @@ class ProfilePic extends StatelessWidget {
       child: Stack(
         fit: StackFit.expand,
         clipBehavior: Clip.none,
-        children: [
-          CircleAvatar(
-            backgroundImage: AssetImage("assets/54955.jpg"),
-            // backgroundImage:
-            //     AssetImage(FirebaseAuth.instance.currentUser.photoURL),
-          ),
+        children: <Widget>[
+          FirebaseAuth.instance.currentUser.photoURL != null
+              ? ClipRRect(
+                  borderRadius: BorderRadius.circular(50.0),
+                  child: Image.network(
+                    FirebaseAuth.instance.currentUser.photoURL,
+                  ),
+                )
+              : CircleAvatar(
+                  // backgroundImage: AssetImage("assets/54955.jpg"),
+
+                  backgroundImage: AssetImage('assets/54955.jpg'),
+                ),
           Positioned(
             right: -16,
             bottom: 0,
@@ -135,8 +148,17 @@ class ProfilePic extends StatelessWidget {
                   primary: Colors.black,
                   backgroundColor: Color(0xFFF5F6F9),
                 ),
-                onPressed: () {},
-                child: Icon(Icons.camera_enhance_rounded),
+                onPressed: () => {
+                  // print("checkingHere"),
+                  // print(FirebaseAuth.instance.currentUser.photoURL),
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => UploadImage(),
+                    ),
+                  ),
+                },
+                child: Icon(Icons.edit),
               ),
             ),
           )
@@ -255,17 +277,31 @@ class Body extends StatelessWidget {
             ProfileMenu(
               text: "Email",
               icon: Icons.email_rounded,
-              press: () => {},
+              press: () => {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => UpdateEmail(),
+                  ),
+                ),
+              },
               color: Colors.black,
               iconRight: Icons.edit_note_rounded,
             ),
-            ProfileMenu(
-              text: "Password",
-              icon: Icons.password_rounded,
-              press: () => {},
-              color: Colors.black,
-              iconRight: Icons.edit_note_rounded,
-            ),
+            // ProfileMenu(
+            //   text: "Change Password",
+            //   icon: Icons.password_rounded,
+            //   press: () => {
+            //     Navigator.push(
+            //       context,
+            //       MaterialPageRoute(
+            //         builder: (context) => UpdatePassword(),
+            //       ),
+            //     ),
+            //   },
+            //   color: Colors.black,
+            //   iconRight: Icons.edit_note_rounded,
+            // ),
             ProfileMenu(
               text: "My Activity",
               icon: Icons.local_activity_rounded,
@@ -312,7 +348,14 @@ class Body extends StatelessWidget {
             ProfileMenu(
               text: "Report Query",
               icon: Icons.question_mark_rounded,
-              press: () {},
+              press: () => {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ReportQueryNew(),
+                  ),
+                ),
+              },
               color: Colors.orangeAccent,
               iconRight: Icons.arrow_forward_ios_rounded,
             ),
@@ -395,15 +438,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
         onTap: (index) {
           setState(() {
             _currentIndex = index;
-            if (index == 3) {
-              showAlertDialog(context);
-              // _auth.signOut();
-              // // Navigator.push(
-              // //     context, MaterialPageRoute(builder: (context) => HomePage()));
-              // Navigator.of(context).pushAndRemoveUntil(
-              //     MaterialPageRoute(builder: (context) => HomePage()),
-              //     (route) => false);
-            } else if (index == 0) {
+            if (index == 0) {
               Navigator.push(
                   context, MaterialPageRoute(builder: (context) => Index()));
             } else if (index == 1) {
@@ -412,8 +447,23 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                   MaterialPageRoute(
                       builder: (context) => CompleteProfileScreen()));
             } else if (index == 2) {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => GetUserActivity()));
+              int flag = 0;
+              FirebaseFirestore.instance
+                  .collection('librarian')
+                  .where('email',
+                      isEqualTo: FirebaseAuth.instance.currentUser.email)
+                  .where('displayName',
+                      isEqualTo: FirebaseAuth.instance.currentUser.displayName)
+                  .get()
+                  .then((QuerySnapshot querySnapshot) {
+                flag = 1;
+                print("here");
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => UserTab()));
+              });
+            }
+            if (index == 3) {
+              showAlertDialog(context);
             }
           });
         },
@@ -427,15 +477,20 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
           //     icon: Icon(Icons.favorite_border),
           //     title: Text("Likes"),
           //     selectedColor: Colors.pink),
-          SalomonBottomBarItem(
-            icon: Icon(Icons.search),
-            title: Text("Search"),
-            selectedColor: Colors.orange,
-          ),
+          // SalomonBottomBarItem(
+          //   icon: Icon(Icons.search),
+          //   title: Text("Search"),
+          //   selectedColor: Colors.orange,
+          // ),
           SalomonBottomBarItem(
             icon: Icon(Icons.person),
             title: Text("Profile"),
             selectedColor: Colors.teal,
+          ),
+          SalomonBottomBarItem(
+            icon: Icon(Icons.admin_panel_settings),
+            title: Text("Admin"),
+            selectedColor: Colors.redAccent,
           ),
           SalomonBottomBarItem(
             icon: Icon(Icons.logout),

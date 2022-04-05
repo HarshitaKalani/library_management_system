@@ -100,7 +100,7 @@ class _HomePageState extends State<HomePage> {
                     height: 20,
                   ),
                   Text(
-                    "Automatic identity verification which enables you to verify your identity",
+                    "Nothing is pleasanter than exploring a library, just login and get there!",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.grey[700],

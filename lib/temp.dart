@@ -1,103 +1,273 @@
-import 'package:mailer/mailer.dart';
-import 'package:mailer/smtp_server.dart';
-import 'package:flutter/material.dart';
+// import 'dart:io';
 
-class SendMail extends StatefulWidget {
-  const SendMail({Key? key}) : super(key: key);
+// import 'package:dio/dio.dart';
+// import 'package:dotted_border/dotted_border.dart';
+// import 'package:file_picker/file_picker.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:flutter/material.dart';
+// import 'package:flutter/services.dart';
+// import 'package:iconsax/iconsax.dart';
+// import 'package:http/http.dart' as http;
 
-  @override
-  State<SendMail> createState() => _SendMailState();
-}
+// class UploadImage extends StatefulWidget {
+//   const UploadImage({Key? key}) : super(key: key);
 
-class _SendMailState extends State<SendMail> {
-  sendMail(String email, String personName, String bookName) async {
-    String username = 'goswamipranav11@gmail.com';
-    String password = 'Pranav@2002';
+//   @override
+//   _UploadImageState createState() => _UploadImageState();
+// }
 
-    final smtpServer = gmail(username, password);
-    // Use the SmtpServer class to configure an SMTP server:
-    // final smtpServer = SmtpServer('smtp.domain.com');
-    // See the named arguments of SmtpServer for further configuration
-    // options.
+// class _UploadImageState extends State<UploadImage>
+//     with SingleTickerProviderStateMixin {
+//   String _image =
+//       'https://ouch-cdn2.icons8.com/84zU-uvFboh65geJMR5XIHCaNkx-BZ2TahEpE9TpVJM/rs:fit:784:784/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9wbmcvODU5/L2E1MDk1MmUyLTg1/ZTMtNGU3OC1hYzlh/LWU2NDVmMWRiMjY0/OS5wbmc.png';
+//   late AnimationController loadingController;
 
-    // Create our message.
-    final message = Message()
-      ..from = Address(username, username.toString())
-      ..recipients.add(email)
-      // ..ccRecipients.addAll(['destCc1@example.com', 'destCc2@example.com'])
-      // ..bccRecipients.add(Address('bccAddress@example.com'))
-      ..subject = 'Book Issue @Library IITJ::  ${DateTime.now()}'
-      ..text = 'Heyy ' +
-          personName +
-          '!' +
-          '\nYou have successfully Issued ' +
-          bookName +
-          ' on ${DateTime.now()}' +
-          '\nYou will have to return the book within 7 working days else you will be penalised!!' +
-          '\nRegards.';
-    // ..html = "<h1>Test</h1>\n<p>Hey! Here's some HTML content</p>";
+//   File? _file;
+//   PlatformFile? _platformFile;
+//   String path = "";
 
-    try {
-      final sendReport = await send(message, smtpServer);
-      print('Message sent: ' + sendReport.toString());
-    } on MailerException catch (e) {
-      print('Message not sent.');
-      for (var p in e.problems) {
-        print('Problem: ${p.code}: ${p.msg}');
-      }
-    }
-    // DONE
+//   selectFile() async {
+//     final file = await FilePicker.platform.pickFiles(
+//         type: FileType.custom, allowedExtensions: ['png', 'jpg', 'jpeg']);
 
-    // Let's send another message using a slightly different syntax:
-    //
-    // Addresses without a name part can be set directly.
-    // For instance `..recipients.add('destination@example.com')`
-    // If you want to display a name part you have to create an
-    // Address object: `new Address('destination@example.com', 'Display name part')`
-    // Creating and adding an Address object without a name part
-    // `new Address('destination@example.com')` is equivalent to
-    // adding the mail address as `String`.
+//     if (file != null) {
+//       setState(() async {
+//         _file = File(file.files.single.path!);
+//         _platformFile = file.files.first;
+//         var request = http.MultipartRequest(
+//             "POST", Uri.parse("https://api.imgur.com/3/image"));
 
-    // final equivalentMessage = Message()
-    //   ..from = Address(username, 'Your name 😀')
-    //   ..recipients.add(Address('goswamipranav11@gmail.com'))
-    //   // ..ccRecipients
-    //   //     .addAll([Address('destCc1@example.com'), 'destCc2@example.com'])
-    //   // ..bccRecipients.add('bccAddress@example.com')
-    //   ..subject = 'Test Dart Mailer library :: 😀 :: ${DateTime.now()}'
-    //   ..text = 'This is the plain text.\nThis is line 2 of the text part.'
-    //   ..html =
-    //       '<h1>Test</h1>\n<p>Hey! Here is some HTML content</p><img src="cid:myimg@3.141"/>'
-    //   ..attachments = [
-    //     // FileAttachment(File('exploits_of_a_mom.png'))
-    //     //   ..location = Location.inline
-    //     //   ..cid = '<myimg@3.141>'
-    //   ];
+//         request.fields['title'] = "profileImage";
+//         request.headers['Authorization'] = "Client-ID " + "88086886d6517aa";
 
-    final sendReport2 = await send(message, smtpServer);
+//         var picture = http.MultipartFile.fromBytes('image',
+//             (await rootBundle.load('assets/5228739.jpg')).buffer.asUint8List(),
+//             filename: 'testImage.jpg');
 
-    // Sending multiple messages with the same connection
-    //
-    // Create a smtp client that will persist the connection
-    var connection = PersistentConnection(smtpServer);
+//         request.files.add(picture);
 
-    // Send the first message
-    await connection.send(message);
+//         var response = await request.send();
+//         var responseData = await response.stream.toBytes();
 
-    // send the equivalent message
-    // await connection.send(equivalentMessage);
+//         var result = String.fromCharCodes(responseData);
+//         print("resultHere");
+//         for (var i = 0; i < result.length - 8; i = i + 1) {
+//           if (result[i] == 'l') {
+//             if (result[i + 1] == "i") {
+//               if (result[i + 2] == "n") {
+//                 if (result[i + 3] == "k") {
+//                   var j = i + 7;
+//                   while (result[j] != "}") {
+//                     if (result[j] != '\\') {
+//                       path = path + result[j];
+//                     }
+//                     j = j + 1;
+//                   }
+//                   break;
+//                 }
+//               }
+//             }
+//           }
+//         }
+//         print(result);
+//         path = path.substring(0, path.length - 1);
+//         print(path);
 
-    // close the connection
-    await connection.close();
-  }
+//         FirebaseAuth.instance.currentUser.updateProfile(photoURL: path);
+//       });
+//     }
 
-  @override
-  Widget build(BuildContext context) {
-    return TextButton(
-      onPressed: () => sendMail('goswami.4@iitj.ac.in', 'Pranav', 'HEHEHEH'),
-      child: Text(
-        "Add User",
-      ),
-    );
-  }
-}
+//     loadingController.forward();
+//   }
+
+//   @override
+//   void initState() {
+//     loadingController = AnimationController(
+//       vsync: this,
+//       duration: const Duration(seconds: 10),
+//     )..addListener(() {
+//         setState(() {});
+//       });
+
+//     super.initState();
+//   }
+
+//   //////////////////////////////////
+//   /// @theflutterlover on Instagram
+//   ///
+//   /// https://afgprogrammer.com
+//   //////////////////////////////////
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       body: SingleChildScrollView(
+//         child: Column(
+//           children: <Widget>[
+//             SizedBox(
+//               height: 100,
+//             ),
+//             Image.network(
+//               _image,
+//               width: 300,
+//             ),
+//             SizedBox(
+//               height: 50,
+//             ),
+//             Text(
+//               'Upload your file',
+//               style: TextStyle(
+//                   fontSize: 25,
+//                   color: Colors.grey.shade800,
+//                   fontWeight: FontWeight.bold),
+//             ),
+//             SizedBox(
+//               height: 10,
+//             ),
+//             Text(
+//               'File should be jpg, png',
+//               style: TextStyle(fontSize: 15, color: Colors.grey.shade500),
+//             ),
+//             SizedBox(
+//               height: 20,
+//             ),
+//             GestureDetector(
+//               onTap: selectFile,
+//               child: Padding(
+//                   padding:
+//                       EdgeInsets.symmetric(horizontal: 40.0, vertical: 20.0),
+//                   child: DottedBorder(
+//                     borderType: BorderType.RRect,
+//                     radius: Radius.circular(10),
+//                     dashPattern: [10, 4],
+//                     strokeCap: StrokeCap.round,
+//                     color: Colors.blue.shade400,
+//                     child: Container(
+//                       width: double.infinity,
+//                       height: 150,
+//                       decoration: BoxDecoration(
+//                           color: Colors.blue.shade50.withOpacity(.3),
+//                           borderRadius: BorderRadius.circular(10)),
+//                       child: Column(
+//                         mainAxisAlignment: MainAxisAlignment.center,
+//                         children: [
+//                           Icon(
+//                             Iconsax.folder_open,
+//                             color: Colors.blue,
+//                             size: 40,
+//                           ),
+//                           SizedBox(
+//                             height: 15,
+//                           ),
+//                           Text(
+//                             'Select your file',
+//                             style: TextStyle(
+//                                 fontSize: 15, color: Colors.grey.shade400),
+//                           ),
+//                         ],
+//                       ),
+//                     ),
+//                   )),
+//             ),
+//             _platformFile != null
+//                 ? Container(
+//                     padding: EdgeInsets.all(20),
+//                     child: Column(
+//                       crossAxisAlignment: CrossAxisAlignment.start,
+//                       children: [
+//                         Text(
+//                           'Selected File',
+//                           style: TextStyle(
+//                             color: Colors.grey.shade400,
+//                             fontSize: 15,
+//                           ),
+//                         ),
+//                         SizedBox(
+//                           height: 10,
+//                         ),
+//                         Container(
+//                             padding: EdgeInsets.all(8),
+//                             decoration: BoxDecoration(
+//                                 borderRadius: BorderRadius.circular(10),
+//                                 color: Colors.white,
+//                                 boxShadow: [
+//                                   BoxShadow(
+//                                     color: Colors.grey.shade200,
+//                                     offset: Offset(0, 1),
+//                                     blurRadius: 3,
+//                                     spreadRadius: 2,
+//                                   )
+//                                 ]),
+//                             child: Row(
+//                               children: [
+//                                 ClipRRect(
+//                                     borderRadius: BorderRadius.circular(8),
+//                                     child: Image.file(
+//                                       _file!,
+//                                       width: 70,
+//                                     )),
+//                                 SizedBox(
+//                                   width: 10,
+//                                 ),
+//                                 Expanded(
+//                                   child: Column(
+//                                     crossAxisAlignment:
+//                                         CrossAxisAlignment.start,
+//                                     children: [
+//                                       Text(
+//                                         _platformFile!.name,
+//                                         style: TextStyle(
+//                                             fontSize: 13, color: Colors.black),
+//                                       ),
+//                                       SizedBox(
+//                                         height: 5,
+//                                       ),
+//                                       Text(
+//                                         '${(_platformFile!.size / 1024).ceil()} KB',
+//                                         style: TextStyle(
+//                                             fontSize: 13,
+//                                             color: Colors.grey.shade500),
+//                                       ),
+//                                       SizedBox(
+//                                         height: 5,
+//                                       ),
+//                                       Container(
+//                                           height: 5,
+//                                           clipBehavior: Clip.hardEdge,
+//                                           decoration: BoxDecoration(
+//                                             borderRadius:
+//                                                 BorderRadius.circular(5),
+//                                             color: Colors.blue.shade50,
+//                                           ),
+//                                           child: LinearProgressIndicator(
+//                                             value: loadingController.value,
+//                                           )),
+//                                     ],
+//                                   ),
+//                                 ),
+//                                 SizedBox(
+//                                   width: 10,
+//                                 ),
+//                               ],
+//                             )),
+//                         SizedBox(
+//                           height: 20,
+//                         ),
+//                         // MaterialButton(
+//                         //   minWidth: double.infinity,
+//                         //   height: 45,
+//                         //   onPressed: () {},
+//                         //   color: Colors.black,
+//                         //   child: Text('Upload', style: TextStyle(color: Colors.white),),
+//                         // )
+//                       ],
+//                     ))
+//                 : Container(),
+//             SizedBox(
+//               height: 150,
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }

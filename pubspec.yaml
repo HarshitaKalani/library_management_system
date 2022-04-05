@@ -58,6 +58,16 @@ dependencies:
   mailer: ^3.3.0
   flutter_local_notifications: ^4.0.1+2
   auto_size_text: ^3.0.0
+  get: ^4.6.1
+  whatsapp_share: ^1.1.1
+  image_picker: ^0.6.7+22
+  path_provider: ^2.0.9
+  screenshot: ^1.2.3
+  flutter_search_bar: ^2.1.0
+  dio: ^3.0.10
+  dotted_border: ^2.0.0+2
+  file_picker: ^2.1.7
+  iconsax: ^0.0.8
 
 dev_dependencies:
   integration_test:

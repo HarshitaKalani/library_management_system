@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:loginapp/adminPanel.dart';
 import 'package:loginapp/getUserIssuedBooks.dart';
 import 'package:loginapp/seats.dart';
 import 'package:loginapp/userProfile.dart';
@@ -25,6 +26,8 @@ class Index extends StatefulWidget {
 
 class _IndexState extends State<Index> {
   // List<Service> services2 = Service.getList(); // to show book in backend.
+  int flag = 0;
+
   List<Service> services2 = <Service>[
     Service('Cleaning',
         'https://img.icons8.com/external-vitaliy-gorbachev-flat-vitaly-gorbachev/2x/external-cleaning-labour-day-vitaliy-gorbachev-flat-vitaly-gorbachev.png'),
@@ -42,9 +45,9 @@ class _IndexState extends State<Index> {
 
   List<dynamic> _products = [
     {
-      'title': 'Library Sitting Space Arrangement',
+      'title': 'Library IIT Jodhpur',
       'image': 'assets/Logo_IITJ.png',
-      'description': 'Tap to see available spaces'
+      'description': ''
     },
     {
       'title': 'Books List',
@@ -52,12 +55,12 @@ class _IndexState extends State<Index> {
       'image': 'assets/5836.jpg',
       'description': 'Tap to see Availabe Books'
     },
-    {
-      'title': 'Our Team',
-      // 'image':'https://images.unsplash.com/photo-1589188056053-28910dc61d38?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2264&q=80',
-      'image': 'assets/54955.jpg',
-      'description': 'Wohoo!!'
-    },
+    // {
+    //   'title': 'Our Team',
+    //   // 'image':'https://images.unsplash.com/photo-1589188056053-28910dc61d38?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2264&q=80',
+    //   'image': 'assets/54955.jpg',
+    //   'description': 'Wohoo!!'
+    // },
     {
       'title': 'Mark Presence',
       'image': 'assets/5228739.jpg',
@@ -113,6 +116,8 @@ class _IndexState extends State<Index> {
       var i = 0;
       var flag = 0;
       querySnapshot.docs.forEach((doc) {
+        print("pranavChecking");
+        print(doc['bookImage']);
         var x = Books(
             doc['bookName'],
             doc['bookGenre'],
@@ -179,14 +184,14 @@ class _IndexState extends State<Index> {
                                     booksGenre: booksGenre,
                                   )));
                     } else if (_current == 0) {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Busseats()));
-                    } else if (_current == 3) {
+                      // Navigator.push(context,
+                      //     MaterialPageRoute(builder: (context) => Busseats()));
+                    } else if (_current == 2) {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => QRViewExample()));
-                    } else if (_current == 4) {
+                    } else if (_current == 3) {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -195,7 +200,7 @@ class _IndexState extends State<Index> {
                       );
                     }
                   },
-                  child: _current == 3
+                  child: _current == 2
                       ? Icon(
                           Icons.camera_alt_outlined,
                         )
@@ -209,15 +214,11 @@ class _IndexState extends State<Index> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
-        title: Row(
-          children: [
-            Text(
-              'You are @Library IIT Jodhpur ',
-              style: TextStyle(
-                color: Colors.black,
-              ),
-            ),
-          ],
+        title: Text(
+          '\n Welcome to Library IIT Jodhpur',
+          style: TextStyle(
+            color: Colors.black,
+          ),
         ),
       ),
       body: Container(
@@ -327,27 +328,36 @@ class _IndexState extends State<Index> {
         onTap: (index) {
           setState(() {
             _currentIndex = index;
-            if (index == 3) {
-              showAlertDialog(context);
-              // _auth.signOut();
-              // // Navigator.push(
-              // //     context, MaterialPageRoute(builder: (context) => HomePage()));
-              // Navigator.of(context).pushAndRemoveUntil(
-              //     MaterialPageRoute(builder: (context) => HomePage()),
-              //     (route) => false);
-            }
-            // else if (index == 0) {
-            //   Navigator.push(context,
-            //       MaterialPageRoute(builder: (context) => Verificatoin()));
-            // }
-            else if (index == 1) {
+            if (index == 0) {
               Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => SendMail()));
-            } else if (index == 2) {
+                  context, MaterialPageRoute(builder: (context) => Index()));
+            } else if (index == 1) {
               Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: (context) => CompleteProfileScreen()));
+            } else if (index == 2) {
+              FirebaseFirestore.instance
+                  .collection('librarian')
+                  .where('email',
+                      isEqualTo: FirebaseAuth.instance.currentUser.email)
+                  .get()
+                  .then((QuerySnapshot querySnapshot) {
+                querySnapshot.docs.forEach((doc) {
+                  // print(doc['entryTime'].toDate().toString());
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => UserTab()));
+                  // var x = Service(doc["full_name"],
+                  //     'https://img.icons8.com/external-vitaliy-gorbachev-flat-vitaly-gorbachev/2x/external-cleaning-labour-day-vitaliy-gorbachev-flat-vitaly-gorbachev.png');
+                  // _services.insert(i, x);
+                  // print(_services);
+                });
+                // Navigator.push(context,
+                //     MaterialPageRoute(builder: (context) => UserTab()));
+              });
+            }
+            if (index == 3) {
+              showAlertDialog(context);
             }
           });
         },
@@ -361,15 +371,20 @@ class _IndexState extends State<Index> {
           //     icon: Icon(Icons.favorite_border),
           //     title: Text("Likes"),
           //     selectedColor: Colors.pink),
-          SalomonBottomBarItem(
-            icon: Icon(Icons.search),
-            title: Text("Search"),
-            selectedColor: Colors.orange,
-          ),
+          // SalomonBottomBarItem(
+          //   icon: Icon(Icons.search),
+          //   title: Text("Search"),
+          //   selectedColor: Colors.orange,
+          // ),
           SalomonBottomBarItem(
             icon: Icon(Icons.person),
             title: Text("Profile"),
             selectedColor: Colors.teal,
+          ),
+          SalomonBottomBarItem(
+            icon: Icon(Icons.admin_panel_settings),
+            title: Text("Admin"),
+            selectedColor: Colors.redAccent,
           ),
           SalomonBottomBarItem(
             icon: Icon(Icons.logout),
@@ -403,7 +418,7 @@ class _IndexState extends State<Index> {
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
       title: Text("Logout Alert!!"),
-      content: Text("Are You Sure You Want To LogOut?"),
+      content: Text("Are you sure you want to logout?"),
       actions: [
         okButton,
       ],

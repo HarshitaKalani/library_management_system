@@ -30,24 +30,24 @@
 //   Widget build(BuildContext context) {
 //     final User user = _auth.currentUser;
 //     final username = user.displayName;
-    // final Stream<QuerySnapshot> _usersStream = FirebaseFirestore.instance
-    //     .collection('InTime')
-    //     .where('personName', isEqualTo: _auth.currentUser.displayName)
-    //     .snapshots(includeMetadataChanges: true);
+//     final Stream<QuerySnapshot> _usersStream = FirebaseFirestore.instance
+//         .collection('InTime')
+//         .where('personName', isEqualTo: _auth.currentUser.displayName)
+//         .snapshots(includeMetadataChanges: true);
     // final Future<Null> _listUser = FirebaseFirestore.instance
     //     .collection('InTime')
     //     .where('personName', isEqualTo: username)
     //     .get()
     //     .then((QuerySnapshot querySnapshot) {
     //   var i = 0;
-    //   querySnapshot.docs.forEach((doc) {
-    //     print(doc['entryTime'].toDate().toString());
-    //     // var x = Service(doc["full_name"],
-    //     //     'https://img.icons8.com/external-vitaliy-gorbachev-flat-vitaly-gorbachev/2x/external-cleaning-labour-day-vitaliy-gorbachev-flat-vitaly-gorbachev.png');
-    //     // _services.insert(i, x);
-    //     // print(_services);
-    //   });
-    // });
+      // querySnapshot.docs.forEach((doc) {
+      //   print(doc['entryTime'].toDate().toString());
+      //   // var x = Service(doc["full_name"],
+      //   //     'https://img.icons8.com/external-vitaliy-gorbachev-flat-vitaly-gorbachev/2x/external-cleaning-labour-day-vitaliy-gorbachev-flat-vitaly-gorbachev.png');
+      //   // _services.insert(i, x);
+      //   // print(_services);
+      // });
+//     });
 //     return Scaffold(
 //       appBar: AppBar(
 //         elevation: 0,
@@ -99,7 +99,7 @@
 //         onTap: (index) {
 //           setState(() {
 //             _currentIndex = index;
-//             if (index == 3) {
+//             if (index == 4) {
 //               showAlertDialog(context);
 //               // _auth.signOut();
 //               // // Navigator.push(
@@ -142,6 +142,11 @@
 //             icon: Icon(Icons.person),
 //             title: Text("Profile"),
 //             selectedColor: Colors.teal,
+//           ),
+// SalomonBottomBarItem(
+//             icon: Icon(Icons.admin_panel_settings),
+//             title: Text("Admin"),
+//             selectedColor: Colors.redAccent,
 //           ),
 //           SalomonBottomBarItem(
 //             icon: Icon(Icons.logout),

@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:loginapp/adminPanel.dart';
+import 'package:loginapp/index.dart';
 import 'package:loginapp/main.dart';
 import 'package:loginapp/temp.dart';
 import 'package:loginapp/userProfile.dart';
@@ -55,7 +57,7 @@ class _GetUserActivityState extends State<GetUserActivity> {
         title: Row(
           children: [
             Text(
-              'Your Past Visits @ Library IITJ',
+              'Your Past Visits at Library IITJ',
               style: TextStyle(
                 color: Colors.black,
               ),
@@ -102,27 +104,32 @@ class _GetUserActivityState extends State<GetUserActivity> {
         onTap: (index) {
           setState(() {
             _currentIndex = index;
-            if (index == 3) {
-              showAlertDialog(context);
-              // _auth.signOut();
-              // // Navigator.push(
-              // //     context, MaterialPageRoute(builder: (context) => HomePage()));
-              // Navigator.of(context).pushAndRemoveUntil(
-              //     MaterialPageRoute(builder: (context) => HomePage()),
-              //     (route) => false);
-            }
-            // else if (index == 0) {
-            //   Navigator.push(context,
-            //       MaterialPageRoute(builder: (context) => Verificatoin()));
-            // }
-            else if (index == 1) {
+            if (index == 0) {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Index()));
+            } else if (index == 1) {
               Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: (context) => CompleteProfileScreen()));
             } else if (index == 2) {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => GetUserActivity()));
+              int flag = 0;
+              FirebaseFirestore.instance
+                  .collection('librarian')
+                  .where('email',
+                      isEqualTo: FirebaseAuth.instance.currentUser.email)
+                  .where('displayName',
+                      isEqualTo: FirebaseAuth.instance.currentUser.displayName)
+                  .get()
+                  .then((QuerySnapshot querySnapshot) {
+                flag = 1;
+                print("here");
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => UserTab()));
+              });
+            }
+            if (index == 3) {
+              showAlertDialog(context);
             }
           });
         },
@@ -136,15 +143,20 @@ class _GetUserActivityState extends State<GetUserActivity> {
           //     icon: Icon(Icons.favorite_border),
           //     title: Text("Likes"),
           //     selectedColor: Colors.pink),
-          SalomonBottomBarItem(
-            icon: Icon(Icons.search),
-            title: Text("Search"),
-            selectedColor: Colors.orange,
-          ),
+          // SalomonBottomBarItem(
+          //   icon: Icon(Icons.search),
+          //   title: Text("Search"),
+          //   selectedColor: Colors.orange,
+          // ),
           SalomonBottomBarItem(
             icon: Icon(Icons.person),
             title: Text("Profile"),
             selectedColor: Colors.teal,
+          ),
+          SalomonBottomBarItem(
+            icon: Icon(Icons.admin_panel_settings),
+            title: Text("Admin"),
+            selectedColor: Colors.redAccent,
           ),
           SalomonBottomBarItem(
             icon: Icon(Icons.logout),

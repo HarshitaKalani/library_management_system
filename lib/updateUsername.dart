@@ -19,6 +19,7 @@ class _UpdateUserNameState extends State<UpdateUserName> {
   String? _name, _name2;
 
   updateUserName() {
+    _formKey.currentState?.save();
     print(_name);
     print(_name2);
     if (_name == _name2) {
@@ -126,11 +127,12 @@ class _UpdateUserNameState extends State<UpdateUserName> {
                                   return "Enter Name";
                               },
                               decoration: InputDecoration(
-                                labelText: "Username",
+                                labelText: "New username",
                                 prefixIcon: Icon(Icons.person),
                                 contentPadding: EdgeInsets.symmetric(
                                     vertical: 30, horizontal: 10),
                                 enabledBorder: (OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(50),
                                   borderSide: BorderSide(
                                     color: Colors.grey,
                                   ),
@@ -147,11 +149,12 @@ class _UpdateUserNameState extends State<UpdateUserName> {
                                   return "Confirm Username";
                               },
                               decoration: InputDecoration(
-                                labelText: "Confirm Username",
+                                labelText: "Confirm username",
                                 prefixIcon: Icon(Icons.person),
                                 contentPadding: EdgeInsets.symmetric(
                                     vertical: 30, horizontal: 10),
                                 enabledBorder: (OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(50),
                                   borderSide: BorderSide(
                                     color: Colors.grey,
                                   ),

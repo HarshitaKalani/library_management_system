@@ -1,7 +1,12 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:loginapp/login.dart';
+import 'package:loginapp/verifyUserLogin.dart';
+import 'package:mailer/mailer.dart';
+import 'package:mailer/smtp_server/gmail.dart';
 import 'main.dart';
 import 'index.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -46,7 +51,6 @@ class _SignupPageState extends State<SignupPage> {
         // await Navigator.pushReplacementNamed(context, "/");
         await Navigator.push(
             context, MaterialPageRoute(builder: (context) => Index()));
-
         return user;
       } else {
         throw StateError('Missing Google Auth Token');
@@ -99,6 +103,108 @@ class _SignupPageState extends State<SignupPage> {
         );
       },
     );
+  }
+
+  Future<void> sendMail(String email, String personName, String code) async {
+    String username = 'goswamipranav11@gmail.com';
+    String password = 'Pranav@2002';
+
+    final smtpServer = gmail(username, password);
+    // Use the SmtpServer class to configure an SMTP server:
+    // final smtpServer = SmtpServer('smtp.domain.com');
+    // See the named arguments of SmtpServer for further configuration
+    // options.
+
+    // Create our message.
+    final message = Message()
+      ..from = Address(username, username.toString())
+      ..recipients.add(email)
+      // ..ccRecipients.addAll(['destCc1@example.com', 'destCc2@example.com'])
+      // ..bccRecipients.add(Address('bccAddress@example.com'))
+      ..subject = 'No reply mail From Library IITJ::  ${DateTime.now()}'
+      ..text = 'Heyy ' +
+          personName +
+          '!' +
+          '\nThe mail is from admin @Library IITJ ' +
+          ' on ${DateTime.now()}' +
+          '\nYour 4 digit one time password is' +
+          '\n' +
+          code.toString() +
+          '\nRegards.';
+    // ..html = "<h1>Test</h1>\n<p>Hey! Here's some HTML content</p>";
+
+    try {
+      final sendReport = await send(message, smtpServer);
+      print('Message sent: ' + sendReport.toString());
+    } on MailerException catch (e) {
+      print('Message not sent.');
+      for (var p in e.problems) {
+        print('Problem: ${p.code}: ${p.msg}');
+      }
+    }
+    // DONE
+
+    // Let's send another message using a slightly different syntax:
+    //
+    // Addresses without a name part can be set directly.
+    // For instance `..recipients.add('destination@example.com')`
+    // If you want to display a name part you have to create an
+    // Address object: `new Address('destination@example.com', 'Display name part')`
+    // Creating and adding an Address object without a name part
+    // `new Address('destination@example.com')` is equivalent to
+    // adding the mail address as `String`.
+
+    // final equivalentMessage = Message()
+    //   ..from = Address(username, 'Your name 😀')
+    //   ..recipients.add(Address('goswamipranav11@gmail.com'))
+    //   // ..ccRecipients
+    //   //     .addAll([Address('destCc1@example.com'), 'destCc2@example.com'])
+    //   // ..bccRecipients.add('bccAddress@example.com')
+    //   ..subject = 'Test Dart Mailer library :: 😀 :: ${DateTime.now()}'
+    //   ..text = 'This is the plain text.\nThis is line 2 of the text part.'
+    //   ..html =
+    //       '<h1>Test</h1>\n<p>Hey! Here is some HTML content</p><img src="cid:myimg@3.141"/>'
+    //   ..attachments = [
+    //     // FileAttachment(File('exploits_of_a_mom.png'))
+    //     //   ..location = Location.inline
+    //     //   ..cid = '<myimg@3.141>'
+    //   ];
+
+    final sendReport2 = await send(message, smtpServer);
+
+    // Sending multiple messages with the same connection
+    //
+    // Create a smtp client that will persist the connection
+    var connection = PersistentConnection(smtpServer);
+
+    // Send the first message
+    await connection.send(message);
+
+    // send the equivalent message
+    // await connection.send(equivalentMessage);
+
+    // close the connection
+    await connection.close();
+  }
+
+  sendOTP() async {
+    _formKey.currentState?.save();
+    var rng = new Random();
+    var code = rng.nextInt(9999);
+    if (code < 1000) {
+      code = code + 1000;
+    }
+    sendMail(_email, _name, code.toString());
+    Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(
+            builder: (context) => VerifyUserLogin(
+                  email: _email,
+                  name: _name,
+                  otp: code.toString(),
+                  password: _password,
+                )),
+        (route) => false);
   }
 
   @override
@@ -257,7 +363,8 @@ class _SignupPageState extends State<SignupPage> {
                     child: MaterialButton(
                       minWidth: double.infinity,
                       height: 60,
-                      onPressed: signUp,
+                      // onPressed: signUp,
+                      onPressed: sendOTP,
                       color: Colors.greenAccent,
                       elevation: 0,
                       shape: RoundedRectangleBorder(

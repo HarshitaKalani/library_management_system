@@ -1,7 +1,11 @@
+// ignore_for_file: unnecessary_new
+
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:loginapp/adminPanel.dart';
 import 'package:loginapp/index.dart';
 import 'package:loginapp/main.dart';
 import 'package:loginapp/readFireStore.dart';
+import 'package:loginapp/userProfile.dart';
 import 'package:loginapp/variableBooks.dart';
 import 'package:loginapp/writeFireStore.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
@@ -26,7 +30,10 @@ class Genre extends StatefulWidget {
 
 class _GenreState extends State<Genre> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  late String _searchValue;
+  late int count = 0;
+  late int count2 = 0;
   // List<Service> services = [
   //   Service('Cleaning',
   //       'https://img.icons8.com/external-vitaliy-gorbachev-flat-vitaly-gorbachev/2x/external-cleaning-labour-day-vitaliy-gorbachev-flat-vitaly-gorbachev.png'),
@@ -121,13 +128,45 @@ class _GenreState extends State<Genre> {
               1.2,
               Padding(
                 padding: EdgeInsets.only(top: 120.0, right: 20.0, left: 20.0),
-                child: Text(
-                  'Select Genre!',
-                  style: TextStyle(
-                    fontSize: 40,
-                    color: Colors.grey.shade900,
-                    fontWeight: FontWeight.bold,
-                  ),
+                child: Column(
+                  children: <Widget>[
+                    Text(
+                      'Select Genre!',
+                      style: TextStyle(
+                        fontSize: 40,
+                        color: Colors.grey.shade900,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Container(
+                      height: 46,
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade200,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Form(
+                        key: _formKey,
+                        child: TextFormField(
+                          validator: (input) {
+                            if (input != null && input.isEmpty)
+                              return "Search Something";
+                          },
+                          cursorColor: Colors.black,
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(
+                              Icons.search,
+                              color: Colors.grey.shade700,
+                            ),
+                            border: InputBorder.none,
+                            hintText: "Search Genre",
+                            hintStyle: TextStyle(color: Colors.grey.shade500),
+                          ),
+                          onSaved: (input) => _searchValue = input!,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ))
@@ -151,6 +190,7 @@ class _GenreState extends State<Genre> {
                       itemBuilder: (BuildContext context, int index) {
                         print(widget.booksGenre.length);
                         print("here2002");
+                        print(widget.booksGenre[index].bookImage);
                         return FadeAnimation(
                             (1.0 + index) / 4,
                             serviceContainer(widget.booksGenre[index].bookImage,
@@ -166,20 +206,32 @@ class _GenreState extends State<Genre> {
         onTap: (index) {
           setState(() {
             _currentIndex = index;
-            if (index == 3) {
-              showAlertDialog(context);
-            } else if (index == 0) {
+            if (index == 0) {
               Navigator.push(
                   context, MaterialPageRoute(builder: (context) => Index()));
             } else if (index == 1) {
-              // Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //         builder: (context) =>
-              //             AddUser("Hereit is", "Flipkart", 20)));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => CompleteProfileScreen()));
             } else if (index == 2) {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => GetUserActivity()));
+              int flag = 0;
+              FirebaseFirestore.instance
+                  .collection('librarian')
+                  .where('email',
+                      isEqualTo: FirebaseAuth.instance.currentUser.email)
+                  .where('displayName',
+                      isEqualTo: FirebaseAuth.instance.currentUser.displayName)
+                  .get()
+                  .then((QuerySnapshot querySnapshot) {
+                flag = 1;
+                print("here");
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => UserTab()));
+              });
+            }
+            if (index == 3) {
+              showAlertDialog(context);
             }
           });
         },
@@ -193,15 +245,20 @@ class _GenreState extends State<Genre> {
           //     icon: Icon(Icons.favorite_border),
           //     title: Text("Likes"),
           //     selectedColor: Colors.pink),
-          SalomonBottomBarItem(
-            icon: Icon(Icons.search),
-            title: Text("Search"),
-            selectedColor: Colors.orange,
-          ),
+          // SalomonBottomBarItem(
+          //   icon: Icon(Icons.search),
+          //   title: Text("Search"),
+          //   selectedColor: Colors.orange,
+          // ),
           SalomonBottomBarItem(
             icon: Icon(Icons.person),
             title: Text("Profile"),
             selectedColor: Colors.teal,
+          ),
+          SalomonBottomBarItem(
+            icon: Icon(Icons.admin_panel_settings),
+            title: Text("Admin"),
+            selectedColor: Colors.redAccent,
           ),
           SalomonBottomBarItem(
             icon: Icon(Icons.logout),
@@ -224,6 +281,19 @@ class _GenreState extends State<Genre> {
           var genre = widget.booksGenre[selectedService].bookGenre;
           print(genre);
           List<Books> selectedBooks = <Books>[];
+          FirebaseFirestore.instance
+              .collection('Books')
+              .where('bookGenre', isEqualTo: genre)
+              .get()
+              .then((QuerySnapshot querySnapshot) {
+            var i = 0;
+            var flag = 0;
+            querySnapshot.docs.forEach(
+              (doc) {
+                count = count + 1;
+              },
+            );
+          });
           Future<Null> _listUser = FirebaseFirestore.instance
               .collection('Books')
               .where('bookGenre', isEqualTo: genre)
@@ -243,15 +313,17 @@ class _GenreState extends State<Genre> {
                     doc.id.toString());
 
                 selectedBooks.insert(i, x);
-
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => VariableBooks(
-                      books: selectedBooks,
+                count2 = count2 + 1;
+                if (count2 == count) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => VariableBooks(
+                        books: selectedBooks,
+                      ),
                     ),
-                  ),
-                );
+                  );
+                }
                 // print(selectedBooks);
               },
             );
