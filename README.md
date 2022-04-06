@@ -28,6 +28,15 @@ If the code shows no sound null safety error, run the below code:
 ```
 flutter run --no-sound-null-safety
 ```
+If the code still do not run
+Step 4: \
+```
+flutter clean
+```
+Step 5: \
+```
+flutter upgrade
+```
 ## Library Management System Features:
 - login/logout
 - Signin/Signup 
