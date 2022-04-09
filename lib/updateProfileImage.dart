@@ -81,7 +81,10 @@ class _UploadImageState extends State<UploadImage>
         path = path.substring(0, path.length - 1);
         print(path);
 
-        FirebaseAuth.instance.currentUser.updateProfile(photoURL: path);
+        // FirebaseAuth.instance.currentUser.updateProfile(photoURL: path);
+        FirebaseAuth.instance.currentUser!.updateProfile(
+            photoURL: path,
+            displayName: FirebaseAuth.instance.currentUser?.displayName!);
 
         Navigator.pushAndRemoveUntil(
           context,
