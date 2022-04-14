@@ -160,6 +160,9 @@ class _VerificatoinState extends State<Verificatoin> {
             ),
             (route) => false,
           );
+        } else {
+          print("hereItIs");
+          showError("Invalid OTP");
         }
       } else {
         if (_code == _resentCode) {
@@ -175,6 +178,9 @@ class _VerificatoinState extends State<Verificatoin> {
             ),
             (route) => false,
           );
+        } else {
+          print("hereItIs");
+          showError("Invalid OTP");
         }
       }
     });
@@ -186,6 +192,28 @@ class _VerificatoinState extends State<Verificatoin> {
         _isVerified = true;
       });
     });
+  }
+
+  showError(String errormessage) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('ERROR'),
+          content: Text(errormessage),
+          actions: <Widget>[
+            FlatButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text(
+                'OK',
+              ),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override

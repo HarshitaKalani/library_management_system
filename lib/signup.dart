@@ -188,7 +188,10 @@ class _SignupPageState extends State<SignupPage> {
   }
 
   sendOTP() async {
-    _formKey.currentState?.save();
+    // _formKey.currentState?.save();
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
+    }
     var rng = new Random();
     var code = rng.nextInt(9999);
     if (code < 1000) {

@@ -23,6 +23,7 @@ class AllIssuedBooks extends StatefulWidget {
 
 class _AllIssuedBooksState extends State<AllIssuedBooks> {
   void sendMail(String email, String personName, String bookName) async {
+    showAlertDialog4(context);
     String username = 'goswamipranav11@gmail.com';
     String password = 'Pranav@2002';
 
@@ -86,7 +87,8 @@ class _AllIssuedBooksState extends State<AllIssuedBooks> {
     //     //   ..cid = '<myimg@3.141>'
     //   ];
 
-    final sendReport2 = await send(message, smtpServer);
+    // final sendReport2 = await send(message, smtpServer);
+    showAlertDialog3(context);
 
     // Sending multiple messages with the same connection
     //
@@ -94,7 +96,7 @@ class _AllIssuedBooksState extends State<AllIssuedBooks> {
     var connection = PersistentConnection(smtpServer);
 
     // Send the first message
-    await connection.send(message);
+    // await connection.send(message);
 
     // send the equivalent message
     // await connection.send(equivalentMessage);
@@ -133,7 +135,7 @@ class _AllIssuedBooksState extends State<AllIssuedBooks> {
         title: Row(
           children: [
             Text(
-              'Total Books Issued : ' + _countIssuedBooks.toString(),
+              'Books Issued : ',
               style: TextStyle(
                 color: Colors.black,
               ),
@@ -157,8 +159,9 @@ class _AllIssuedBooksState extends State<AllIssuedBooks> {
               Map<String, dynamic> data =
                   document.data()! as Map<String, dynamic>;
               return ListTile(
-                title: Text("Issued By: " + data['issuedBy']),
-                subtitle: Text("Issued on Date : " +
+                title: Text(
+                    data['bookName'] + ' ' + "issued by: " + data['issuedBy']),
+                subtitle: Text("On date : " +
                     DateFormat.yMMMd()
                         .format(data['issuedTime'].toDate())
                         .toString()),
@@ -188,19 +191,23 @@ class _AllIssuedBooksState extends State<AllIssuedBooks> {
                   MaterialPageRoute(
                       builder: (context) => CompleteProfileScreen()));
             } else if (index == 2) {
-              int flag = 0;
               FirebaseFirestore.instance
                   .collection('librarian')
                   .where('email',
                       isEqualTo: FirebaseAuth.instance.currentUser.email)
-                  .where('displayName',
-                      isEqualTo: FirebaseAuth.instance.currentUser.displayName)
                   .get()
                   .then((QuerySnapshot querySnapshot) {
-                flag = 1;
-                print("here");
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => UserTab()));
+                querySnapshot.docs.forEach((doc) {
+                  // print(doc['entryTime'].toDate().toString());
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => UserTab()));
+                  // var x = Service(doc["full_name"],
+                  //     'https://img.icons8.com/external-vitaliy-gorbachev-flat-vitaly-gorbachev/2x/external-cleaning-labour-day-vitaliy-gorbachev-flat-vitaly-gorbachev.png');
+                  // _services.insert(i, x);
+                  // print(_services);
+                });
+                // Navigator.push(context,
+                //     MaterialPageRoute(builder: (context) => UserTab()));
               });
             }
             if (index == 3) {
@@ -302,6 +309,54 @@ class _AllIssuedBooksState extends State<AllIssuedBooks> {
       actions: [
         okButton,
       ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
+  showAlertDialog3(BuildContext context) {
+    // set up the button
+    // Widget logOutButton = SalomonBottomBarItem(
+    //   icon: Icon(Icons.logout),
+    //   title: Text("LogOut"),
+    //   selectedColor: Colors.redAccent,
+    // );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("Mail Sent"),
+      content: Text("Tap anywhere to exit popup!"),
+      actions: [],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
+  showAlertDialog4(BuildContext context) {
+    // set up the button
+    // Widget logOutButton = SalomonBottomBarItem(
+    //   icon: Icon(Icons.logout),
+    //   title: Text("LogOut"),
+    //   selectedColor: Colors.redAccent,
+    // );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("Mail in process"),
+      content: Text("Please wait"),
+      actions: [],
     );
 
     // show the dialog

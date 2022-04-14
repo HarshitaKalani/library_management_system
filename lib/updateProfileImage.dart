@@ -109,11 +109,6 @@ class _UploadImageState extends State<UploadImage>
     super.initState();
   }
 
-  //////////////////////////////////
-  /// @theflutterlover on Instagram
-  ///
-  /// https://afgprogrammer.com
-  //////////////////////////////////
   @override
   Widget build(BuildContext context) {
     return Scaffold(

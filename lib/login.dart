@@ -46,12 +46,13 @@ class _LoginPageState extends State<LoginPage> {
         _formKey.currentState != null &&
         _formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-      Navigator.push(context, MaterialPageRoute(builder: (context) => Index()));
       try {
         await _auth.signInWithEmailAndPassword(
             email: _email, password: _password);
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Index()));
       } catch (e) {
-        showError("Error here");
+        showError("Email and Password donot match!!");
       }
     }
   }

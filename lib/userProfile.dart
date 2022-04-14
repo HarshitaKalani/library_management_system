@@ -447,19 +447,23 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                   MaterialPageRoute(
                       builder: (context) => CompleteProfileScreen()));
             } else if (index == 2) {
-              int flag = 0;
               FirebaseFirestore.instance
                   .collection('librarian')
                   .where('email',
                       isEqualTo: FirebaseAuth.instance.currentUser.email)
-                  .where('displayName',
-                      isEqualTo: FirebaseAuth.instance.currentUser.displayName)
                   .get()
                   .then((QuerySnapshot querySnapshot) {
-                flag = 1;
-                print("here");
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => UserTab()));
+                querySnapshot.docs.forEach((doc) {
+                  // print(doc['entryTime'].toDate().toString());
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => UserTab()));
+                  // var x = Service(doc["full_name"],
+                  //     'https://img.icons8.com/external-vitaliy-gorbachev-flat-vitaly-gorbachev/2x/external-cleaning-labour-day-vitaliy-gorbachev-flat-vitaly-gorbachev.png');
+                  // _services.insert(i, x);
+                  // print(_services);
+                });
+                // Navigator.push(context,
+                //     MaterialPageRoute(builder: (context) => UserTab()));
               });
             }
             if (index == 3) {
