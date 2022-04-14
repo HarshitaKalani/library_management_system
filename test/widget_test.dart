@@ -1,4 +1,4 @@
-// This is a basic Flutter widget test.
+// This is a basic Flutter applicataion test.
 //
 // To perform an interaction with a widget in your test, use the WidgetTester
 // utility that Flutter provides. For example, you can send tap and scroll
@@ -23,7 +23,6 @@ void main() {
 
     //Verify bottom modal sheet
     expect(find.byIcon(Icons.home), findsOneWidget);
-    expect(find.byIcon(Icons.search), findsOneWidget);
     expect(find.byIcon(Icons.person), findsOneWidget);
     expect(find.byIcon(Icons.logout), findsOneWidget);
 

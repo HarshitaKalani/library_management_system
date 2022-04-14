@@ -187,7 +187,6 @@ class _VerifyUserLoginState extends State<VerifyUserLogin> {
   }
 
   verify() {
-    print("idahr aa rha hai");
     setState(() {
       _isLoading = true;
       if (_isResend == 0) {

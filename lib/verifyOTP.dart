@@ -143,7 +143,6 @@ class _VerificatoinState extends State<Verificatoin> {
   }
 
   verify() {
-    print("idahr aa rha hai");
     setState(() {
       _isLoading = true;
       if (_isResend == 0) {

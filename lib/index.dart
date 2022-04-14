@@ -154,11 +154,6 @@ class _IndexState extends State<Index> {
                 child: FloatingActionButton(
                   onPressed: () {
                     if (_current == 1) {
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //         builder: (context) =>
-                      //             SelectService(services: services2)));
                       List<Books> booksGenre = <Books>[];
                       print(books.length);
                       for (var i = 0; i < books.length; i = i + 1) {
@@ -344,16 +339,9 @@ class _IndexState extends State<Index> {
                   .get()
                   .then((QuerySnapshot querySnapshot) {
                 querySnapshot.docs.forEach((doc) {
-                  // print(doc['entryTime'].toDate().toString());
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => UserTab()));
-                  // var x = Service(doc["full_name"],
-                  //     'https://img.icons8.com/external-vitaliy-gorbachev-flat-vitaly-gorbachev/2x/external-cleaning-labour-day-vitaliy-gorbachev-flat-vitaly-gorbachev.png');
-                  // _services.insert(i, x);
-                  // print(_services);
                 });
-                // Navigator.push(context,
-                //     MaterialPageRoute(builder: (context) => UserTab()));
               });
             }
             if (index == 3) {
